@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@Entity(name = "t_pk_itens")
-@Builder
 @NoArgsConstructor
-public class Itens {
-
+@Entity(name = "t_pk_pokestops")
+@Builder
+@AllArgsConstructor
+public class Pokestops {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,15 +26,12 @@ public class Itens {
     private String description;
 
     @NotBlank
-    private String type;
+    private String location;
 
-    @NotBlank
-    private String quantity;
-
-    @OneToMany(mappedBy = "itens", cascade = CascadeType.ALL)
-    private List<ItensTrainers> itensTrainers;
-
-    @OneToMany(mappedBy = "itens", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
     private List<ItensPokestops> itensPokestops;
+
+    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
+    private List<PokestopTrainers> pokestopTrainers;
 
 }

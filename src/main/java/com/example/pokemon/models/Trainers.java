@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(name = "t_pk_trainers")
 @Builder
 @AllArgsConstructor
 public class Trainers {
@@ -23,8 +23,6 @@ public class Trainers {
     @NotBlank
     public String name;
 
-
-
     @NotBlank
     public String insignias;
 
@@ -32,12 +30,23 @@ public class Trainers {
     public int level;
 
     @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
-    private List<Pokemon> pokemon;
+    private List<Capture> captures;
+
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    private List<TrainersGym> trainersGyms;
+
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    private List <ItensTrainers> itensTrainers;
+
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    private List<PokestopTrainers> pokestopTrainers;
+
+    @ManyToOne
+    @JoinColumn(name = "idUser")
+    private User user;
 
 
-    // relciamento com tabela cidade
-//    @NotBlank
-//    public String city;
+
 
 
 }

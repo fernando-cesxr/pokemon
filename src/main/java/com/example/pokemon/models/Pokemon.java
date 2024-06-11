@@ -7,9 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(name = "t_pk_pokemon")
 @Builder
 @AllArgsConstructor
 public class Pokemon {
@@ -28,7 +30,10 @@ public class Pokemon {
     public double height;
 
     @NotBlank
-    public String movements;
+    public String firstAttack;
+
+    @NotBlank
+    public String secondAttack;
 
     @NotBlank
     public int nr_Attack;
@@ -42,11 +47,11 @@ public class Pokemon {
     @NotBlank
     public int level;
 
-    @ManyToOne
-    @JoinColumn(name = "idTrainer")
-    private Trainers trainers;
+    @OneToMany(mappedBy = "pokemon")
+    private List<PokemonAttacks> pokemonAttacks;
 
-
+    @OneToMany(mappedBy = "pokemon")
+    private List<Capture> captures;
 
 
 }

@@ -1,19 +1,18 @@
 package com.example.pokemon.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
-@Entity
+@Entity(name = "t_pk_attacks")
 @Builder
 @NoArgsConstructor
 public class Attacks {
@@ -30,4 +29,8 @@ public class Attacks {
 
     @NotBlank
     private int damage;
+
+    @OneToMany(mappedBy = "attacks", cascade = CascadeType.ALL)
+    private List<PokemonAttacks> pokemonAttacks;
+
 }

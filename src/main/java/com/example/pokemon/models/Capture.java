@@ -1,10 +1,7 @@
 package com.example.pokemon.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +12,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-@Entity
+@Entity(name = "t_pk_capture")
 @Builder
 @NoArgsConstructor
 public class Capture {
@@ -29,6 +26,18 @@ public class Capture {
 
     @NotBlank
     private String capture_location;
+
+    @EmbeddedId // identifying relation
+    @ManyToOne
+    @JoinColumn(name = "idPokemon")
+    private Pokemon pokemon;
+
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "idTrainers")
+    private Trainers trainers;
+
+
 
 
 }

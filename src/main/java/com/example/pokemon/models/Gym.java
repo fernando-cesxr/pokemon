@@ -1,18 +1,17 @@
 package com.example.pokemon.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
-@Entity
+@Entity(name = "t_pk_gym")
 @Builder
 @NoArgsConstructor
 public class Gym {
@@ -30,8 +29,8 @@ public class Gym {
     @NotBlank
     private String insignia;
 
-    // relacimento com tabela cidade
-    //    private String city;
+    @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL)
+    private List<TrainersGym> trainersGyms;
 
 
 }
