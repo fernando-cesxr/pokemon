@@ -2,7 +2,7 @@ package com.example.pokemon.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +23,10 @@ public class User {
     private Long id;
 
     @Email
+    @NotNull
     private String email;
 
-    @NotBlank
+    @NotNull
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+-]).{8,}$", message = "a senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minúscula, 1 número, 1 caracter especial")
     private String password;
 

@@ -2,7 +2,8 @@ package com.example.pokemon.models;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,21 +19,21 @@ import java.time.LocalDate;
 public class Capture {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     private LocalDate date_capture;
 
-    @NotBlank
+    @NotNull
     private String capture_location;
 
-    @EmbeddedId // identifying relation
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idPokemon")
     private Pokemon pokemon;
 
-    @EmbeddedId
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idTrainers")
     private Trainers trainers;

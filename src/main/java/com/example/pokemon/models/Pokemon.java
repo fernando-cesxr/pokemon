@@ -1,13 +1,14 @@
 package com.example.pokemon.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -18,40 +19,34 @@ public class Pokemon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    @NotBlank
-    public String name;
+    @NotNull
+    private String name;
 
-    @NotBlank
-    public String type;
+    @NotNull
+    private String type;
 
-    @NotBlank
-    public double height;
+    private double height;
 
-    @NotBlank
-    public String firstAttack;
+    @NotNull
+    private String firstAttack;
 
-    @NotBlank
-    public String secondAttack;
+    @NotNull
+    private String secondAttack;
 
-    @NotBlank
-    public int nr_Attack;
+    private int nr_Attack;
 
-    @NotBlank
-    public int nr_Defense;
+    private int nr_Defense;
 
-    @NotBlank
-    public int nr_Hp;
+    private int nr_Hp;
 
-    @NotBlank
-    public int level;
+    private int level;
 
     @OneToMany(mappedBy = "pokemon")
     private List<PokemonAttacks> pokemonAttacks;
 
     @OneToMany(mappedBy = "pokemon")
     private List<Capture> captures;
-
 
 }

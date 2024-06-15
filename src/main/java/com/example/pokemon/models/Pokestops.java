@@ -1,7 +1,7 @@
 package com.example.pokemon.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,13 +19,13 @@ public class Pokestops {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     private String name;
 
-    @NotBlank
+    @NotNull
     private String description;
 
-    @NotBlank
+    @NotNull
     private String location;
 
     @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
@@ -33,5 +33,5 @@ public class Pokestops {
 
     @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
     private List<PokestopTrainers> pokestopTrainers;
-
+    
 }

@@ -1,6 +1,7 @@
 package com.example.pokemon.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,14 +18,14 @@ public class TrainersGym {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long position;
+    private Long id;
 
-    @EmbeddedId
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idTrainers")
     private Trainers trainers;
 
-    @EmbeddedId
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idGym")
     private Gym gym;

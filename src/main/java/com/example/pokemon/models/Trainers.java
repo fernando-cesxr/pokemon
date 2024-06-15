@@ -2,7 +2,7 @@ package com.example.pokemon.models;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,16 +18,16 @@ import java.util.List;
 public class Trainers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
-    @NotBlank
-    public String name;
+    @NotNull
+    private String name;
 
-    @NotBlank
-    public String insignias;
+    @NotNull
+    private String insignias;
 
-    @NotBlank
-    public int level;
+    @NotNull
+    private int level;
 
     @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
     private List<Capture> captures;
@@ -36,11 +36,9 @@ public class Trainers {
     private List<TrainersGym> trainersGyms;
 
     @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
-    private List <ItensTrainers> itensTrainers;
-
-    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
     private List<PokestopTrainers> pokestopTrainers;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idUser")
     private User user;
