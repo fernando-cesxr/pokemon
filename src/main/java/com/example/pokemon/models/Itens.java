@@ -1,5 +1,6 @@
 package com.example.pokemon.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Itens {
 
 
     @OneToMany(mappedBy = "itens", cascade = CascadeType.ALL)
+//    @JsonBackReference
     private List<ItensPokestops> itensPokestops;
 
 }

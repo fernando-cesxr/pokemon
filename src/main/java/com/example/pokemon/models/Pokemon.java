@@ -1,5 +1,7 @@
 package com.example.pokemon.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -44,9 +46,11 @@ public class Pokemon {
     private int level;
 
     @OneToMany(mappedBy = "pokemon")
+    @JsonIgnore
     private List<PokemonAttacks> pokemonAttacks;
 
     @OneToMany(mappedBy = "pokemon")
+    @JsonIgnore
     private List<Capture> captures;
 
 }

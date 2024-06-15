@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity(name = "t_pk_pokestopsTrainers")
 @Builder
 @NoArgsConstructor
-public class PokestopTrainers {
+public class PokestopsTrainers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

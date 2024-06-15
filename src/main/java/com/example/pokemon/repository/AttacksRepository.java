@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface AttacksRepository extends JpaRepository<Attacks, Long>{
-    Page<Attacks> findByNameContaining(String busca, Pageable pageable);
+    Page<Attacks> findByNameContaining(String search, Pageable pageable);
 }

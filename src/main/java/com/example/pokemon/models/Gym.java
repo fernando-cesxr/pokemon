@@ -24,13 +24,13 @@ public class Gym {
     private String name;
 
     @NotNull
-    private String type;
+    private String location;
 
     @NotNull
     private String insignia;
 
-    @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL)
-    private List<TrainersGym> trainersGyms;
+//    @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL)
+//    private List<TrainersGym> trainersGyms;
 
 
 }

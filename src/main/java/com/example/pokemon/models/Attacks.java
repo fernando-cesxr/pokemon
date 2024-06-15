@@ -2,6 +2,10 @@ package com.example.pokemon.models;
 
 
 import com.example.pokemon.controller.AttackController;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Null;
 import org.springframework.hateoas.EntityModel;
 
@@ -36,7 +40,11 @@ public class Attacks {
 
     private int damage;
 
+    @NotNull
+    private boolean isCharged;
+
     @OneToMany(mappedBy = "attacks", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PokemonAttacks> pokemonAttacks;
 
     public EntityModel<Attacks> toEntityModel(){

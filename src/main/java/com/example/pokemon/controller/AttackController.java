@@ -44,6 +44,16 @@ public class AttackController {
         return ResponseEntity.status(HttpStatus.CREATED).body(attacks);
     }
 
+    @PutMapping("{id}")
+    public EntityModel<Attacks> update(@PathVariable Long id, @RequestBody @Valid Attacks attacks){
+        attacksRepository.findById(id).orElseThrow(()-> new RestNotFoundException("Attack not found"));
+
+        attacks.setId(id);
+        attacksRepository.save(attacks);
+
+        return attacks.toEntityModel();
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Attacks> destroy(@PathVariable Long id){
         var attacks =  attacksRepository.findById(id).orElseThrow(() -> new RestNotFoundException("Attacks not found"));
