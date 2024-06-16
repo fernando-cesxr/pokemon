@@ -2,8 +2,12 @@ package com.example.pokemon.controller;
 
 
 import com.example.pokemon.exceptions.RestNotFoundException;
+import com.example.pokemon.models.Attacks;
+import com.example.pokemon.models.Pokemon;
 import com.example.pokemon.models.PokemonAttacks;
+import com.example.pokemon.repository.AttacksRepository;
 import com.example.pokemon.repository.PokemonAttacksRepository;
+import com.example.pokemon.repository.PokemonRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,10 +30,18 @@ public class PokemonAttacksController {
     PokemonAttacksRepository pokemonAttacksRepository;
 
     @Autowired
+    AttacksRepository attacksRepository;
+
+    @Autowired
+    PokemonRepository pokemonRepository;
+
+    @Autowired
     PagedResourcesAssembler assembler;
 
+
+
     @GetMapping
-    public PagedModel<PokemonAttacks> index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageagle){
+    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageagle){
         Page<PokemonAttacks> pokemonAttacks = pokemonAttacksRepository.findAll(pageagle);
 
         return assembler.toModel(pokemonAttacks.map(PokemonAttacks::toEntityModel));
@@ -44,6 +56,15 @@ public class PokemonAttacksController {
 
     @PostMapping
     public ResponseEntity<PokemonAttacks> create(@RequestBody @Valid PokemonAttacks pokemonAttacks){
+
+        Attacks attacks = attacksRepository.findById(pokemonAttacks.getAttacks().getId())
+                .orElseThrow(()-> new RestNotFoundException("Attack not found"));
+        Pokemon pokemon = pokemonRepository.findById(pokemonAttacks.getPokemon().getId())
+                .orElseThrow(()-> new RestNotFoundException("Pokemon not found"));
+
+        pokemonAttacks.setAttacks(attacks);
+        pokemonAttacks.setPokemon(pokemon);
+
         pokemonAttacksRepository.save(pokemonAttacks);
         return ResponseEntity.status(HttpStatus.CREATED).body(pokemonAttacks);
     }
@@ -51,6 +72,14 @@ public class PokemonAttacksController {
     @PutMapping("{id}")
     public EntityModel<PokemonAttacks> update(@PathVariable Long id, @RequestBody @Valid PokemonAttacks pokemonAttacks){
         pokemonAttacksRepository.findById(id).orElseThrow(()-> new RestNotFoundException("pokemonAttack not found"));
+
+        Attacks attacks = attacksRepository.findById(pokemonAttacks.getAttacks().getId())
+                .orElseThrow(()-> new RestNotFoundException("Attack not found"));
+        Pokemon pokemon = pokemonRepository.findById(pokemonAttacks.getPokemon().getId())
+                .orElseThrow(()-> new RestNotFoundException("Pokemon not found"));
+
+        pokemonAttacks.setAttacks(attacks);
+        pokemonAttacks.setPokemon(pokemon);
 
         pokemonAttacks.setId(id);
         pokemonAttacksRepository.save(pokemonAttacks);

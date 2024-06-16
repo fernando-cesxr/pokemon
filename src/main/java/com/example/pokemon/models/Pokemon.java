@@ -1,5 +1,6 @@
 package com.example.pokemon.models;
 
+import com.example.pokemon.controller.PokemonController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -8,6 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 
@@ -45,12 +51,20 @@ public class Pokemon {
 
     private int level;
 
-    @OneToMany(mappedBy = "pokemon")
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<PokemonAttacks> pokemonAttacks;
 
-    @OneToMany(mappedBy = "pokemon")
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Capture> captures;
+
+    public EntityModel<Pokemon> toEntityModel(){
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(PokemonController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(PokemonController.class).show(id)).withRel("destroy")
+        );
+    }
 
 }
