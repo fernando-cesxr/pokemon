@@ -1,11 +1,17 @@
 package com.example.pokemon.models;
 
+import com.example.pokemon.controller.PokestopTrainersController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 @Data
 @AllArgsConstructor
@@ -27,5 +33,14 @@ public class PokestopsTrainers {
     @ManyToOne
     @JoinColumn(name = "idTrainers")
     private Trainers trainers;
+
+    public EntityModel<PokestopsTrainers> toEntityModel(){
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(PokestopTrainersController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(PokestopTrainersController.class).show(id)).withRel("destroy")
+        );
+    }
+
 
 }

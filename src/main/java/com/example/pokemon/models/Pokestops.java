@@ -1,5 +1,6 @@
 package com.example.pokemon.models;
 
+import com.example.pokemon.controller.PokestopsController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -8,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 
@@ -36,5 +40,15 @@ public class Pokestops {
     @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<PokestopsTrainers> pokestopTrainers;
+
+    public EntityModel<Pokestops> toEntityModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(PokestopsController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(PokestopsController.class).show(id)).withRel("destroy")
+
+        );
+    }
+
 
 }
