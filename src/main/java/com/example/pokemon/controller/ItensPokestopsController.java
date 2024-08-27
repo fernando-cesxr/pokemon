@@ -1,6 +1,7 @@
 package com.example.pokemon.controller;
 
 import com.example.pokemon.exceptions.RestNotFoundException;
+import com.example.pokemon.models.Itens;
 import com.example.pokemon.models.ItensPokestops;
 import com.example.pokemon.repository.ItensPokestopsRepository;
 import com.example.pokemon.repository.ItensRepository;
@@ -8,6 +9,7 @@ import com.example.pokemon.repository.PokestopsRepository;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -18,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/pokestopsItens")
+@RequestMapping("/api/itensPokestops")
 public class ItensPokestopsController {
 
     @Autowired
@@ -34,8 +36,8 @@ public class ItensPokestopsController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
-        var itensPokestops = itensPokestopsRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+        Page<ItensPokestops> itensPokestops = itensPokestopsRepository.findAll(pageable);
 
         return assembler.toModel(itensPokestops.map(ItensPokestops::toEntityModel));
     }

@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
                 .formLogin().disable()

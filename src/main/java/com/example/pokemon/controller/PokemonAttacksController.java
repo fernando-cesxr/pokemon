@@ -41,7 +41,7 @@ public class PokemonAttacksController {
 
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageagle){
+    public PagedModel<EntityModel<Object>> index (@PageableDefault(size = 10) Pageable pageagle){
         Page<PokemonAttacks> pokemonAttacks = pokemonAttacksRepository.findAll(pageagle);
 
         return assembler.toModel(pokemonAttacks.map(PokemonAttacks::toEntityModel));

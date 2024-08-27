@@ -7,6 +7,7 @@ import com.example.pokemon.repository.TrainersRepository;
 import com.example.pokemon.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -29,8 +30,15 @@ public class TrainerController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) @PageableDefault(size = 10) String search, Pageable pageable){
-        var trainers = trainersRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+        Page<Trainers> trainers = trainersRepository.findAll(pageable);
+        return assembler.toModel(trainers.map(Trainers::toEntityModel));
+    }
+
+    @GetMapping("/findByName")
+    public PagedModel<EntityModel<Object>> searchName(@RequestParam(required = false) @PageableDefault(size = 10)
+                                                      Pageable pageable, String search){
+        Page<Trainers> trainers = trainersRepository.findByNameContaining(search, pageable);
         return assembler.toModel(trainers.map(Trainers::toEntityModel));
     }
 

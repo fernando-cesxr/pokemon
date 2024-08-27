@@ -5,6 +5,7 @@ import com.example.pokemon.models.Gym;
 import com.example.pokemon.repository.GymRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -27,8 +28,15 @@ public class GymController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false)String search, @PageableDefault(size = 10)  Pageable pageable){
-        var gym = gymRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)  Pageable pageable){
+        Page<Gym> gym = gymRepository.findAll(pageable);
+        return assembler.toModel(gym.map(Gym::toEntityModel));
+    }
+
+    @GetMapping("/findByName")
+    public PagedModel<EntityModel<Object>> searchName(@RequestParam (required = false)String search,
+                                                      @PageableDefault(size = 10) Pageable pageable){
+        Page<Gym> gym = gymRepository.findByNameContaining(search, pageable);
         return assembler.toModel(gym.map(Gym::toEntityModel));
     }
 

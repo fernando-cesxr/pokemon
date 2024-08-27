@@ -38,8 +38,8 @@ public class PokestopTrainersController {
 
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10)Pageable pageable){
-        var pokestopTrainers = pokestopsTrainersRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)Pageable pageable){
+        Page<PokestopsTrainers> pokestopTrainers = pokestopsTrainersRepository.findAll(pageable);
         return assembler.toModel(pokestopTrainers.map(PokestopsTrainers::toEntityModel));
     }
 

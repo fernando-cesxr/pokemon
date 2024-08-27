@@ -5,6 +5,7 @@ import com.example.pokemon.models.Pokestops;
 import com.example.pokemon.repository.PokestopsRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -25,11 +26,19 @@ public class PokestopsController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10)Pageable pageable){
-        var pokestops = pokestopsRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)Pageable pageable){
+        Page<Pokestops> pokestops = pokestopsRepository.findAll(pageable);
 
         return assembler.toModel(pokestops.map(Pokestops::toEntityModel));
     }
+
+    @GetMapping("/findByName")
+    public PagedModel<EntityModel<Object>> searchName(@RequestParam(required = true) String search,
+                                                      @PageableDefault(size= 10) Pageable pageable ){
+        Page<Pokestops> pokestops = pokestopsRepository.findByNameContaining(search, pageable);
+        return assembler.toModel(pokestops.map(Pokestops::toEntityModel));
+    }
+
 
     @GetMapping("{id}")
     public EntityModel<Pokestops> show(@PathVariable Long id){
@@ -61,6 +70,8 @@ public class PokestopsController {
         pokestopsRepository.delete(pokestops);
         return ResponseEntity.noContent().build();
     }
+
+
 
 
 

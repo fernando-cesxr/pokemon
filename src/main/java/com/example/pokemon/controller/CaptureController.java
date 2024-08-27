@@ -36,7 +36,7 @@ public class CaptureController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10)Pageable pageable){
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)Pageable pageable){
         Page<Capture> capture  = captureRepository.findAll(pageable);
         return assembler.toModel(capture.map(Capture::toEntityModel));
 

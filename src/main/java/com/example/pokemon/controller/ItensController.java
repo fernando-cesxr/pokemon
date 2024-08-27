@@ -5,6 +5,7 @@ import com.example.pokemon.models.Itens;
 import com.example.pokemon.repository.ItensRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -25,8 +26,16 @@ public class ItensController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false) String search, @PageableDefault(size = 10)Pageable pageable){
-        var itens = itensRepository.findAll(pageable);
+    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+        Page<Itens> itens = itensRepository.findAll(pageable);
+
+        return assembler.toModel(itens.map(Itens::toEntityModel));
+    }
+
+    @GetMapping("/findByName")
+    public PagedModel<EntityModel<Object>> searchName (@RequestParam(required = true)  String search,
+                                                       @PageableDefault (size = 10) Pageable pageable){
+        Page<Itens> itens = itensRepository.findByNameContaining(search, pageable);
 
         return assembler.toModel(itens.map(Itens::toEntityModel));
     }
@@ -37,6 +46,8 @@ public class ItensController {
 
         return itens.toEntityModel();
     }
+
+
 
     @PostMapping
     public ResponseEntity<Itens> create(@RequestBody @Valid Itens itens){
