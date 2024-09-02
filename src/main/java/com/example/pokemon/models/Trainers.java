@@ -29,7 +29,7 @@ public class Trainers {
     private long id;
 
     @NotNull
-    @Column(unique = true)
+//    @Column(unique = true)
     private String name;
 
     private String insignias;

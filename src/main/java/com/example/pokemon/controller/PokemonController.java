@@ -37,7 +37,6 @@ public class PokemonController {
         return assembler.toModel(pokemon.map(Pokemon::toEntityModel));
     }
 
-
     @GetMapping("{id}")
     public EntityModel<Pokemon> show(@PathVariable Long id){
         var pokemon = pokemonRepository.findById(id).orElseThrow(()-> new RestNotFoundException("Pokemon not found"));

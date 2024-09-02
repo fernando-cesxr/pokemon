@@ -8,6 +8,7 @@ import com.example.pokemon.repository.UserRepository;
 import com.example.pokemon.service.TokenJwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -39,6 +40,7 @@ public class UserController {
     @Autowired
     TokenJwtService tokenJwtService;
 
+    @Profile("!dev")
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody @Valid User user){
         user.setPassword(encoder.encode(user.getPassword()));
@@ -46,6 +48,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
+    @Profile("!dev")
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid Credencial credencial){
         manager.authenticate(credencial.toAuthetication());

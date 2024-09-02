@@ -14,48 +14,44 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@Profile("!dev")
-public class SecurityConfig {
+@Profile("dev")
+public class SecurityConfigDev {
+
 
     @Autowired
-    AuthorizationFilter authorizationFilter;
+    AuthorizationFilterDev authorizationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
                 .csrf().disable()
-                .formLogin().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .authorizeHttpRequests()
+                .anyRequest().permitAll()
                 .and()
-                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
         return config.getAuthenticationManager();
     }
 
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new PasswordEncoder() {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new PasswordEncoder() {
 
-        @Override
-        public String encode(CharSequence rawPassword) {
-            return rawPassword.toString() + "@";
-        }
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return rawPassword.toString() + "@";
+            }
 
-        @Override
-        public boolean matches(CharSequence rawPassword, String encodedPassword) {
-            return encodedPassword.equals(encode(rawPassword));
-        }
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encodedPassword.equals(encode(rawPassword));
+            }
 
-    };
-}
+        };
+    }
 
 }
