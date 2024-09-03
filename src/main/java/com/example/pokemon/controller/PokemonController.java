@@ -61,7 +61,7 @@ public class PokemonController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Pokemon> destroy(@PathVariable Long id){
-        var pokemon =pokemonRepository.findById(id).orElseThrow(()-> new RestNotFoundException("Pokemon not found"));
+        var pokemon = pokemonRepository.findById(id).orElseThrow(()-> new RestNotFoundException("Pokemon not found"));
 
         pokemonRepository.delete(pokemon);
 

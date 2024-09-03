@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@Profile("!dev")
+@Profile("!test")
 public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Autowired

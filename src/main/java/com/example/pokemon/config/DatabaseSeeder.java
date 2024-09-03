@@ -50,6 +50,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     ItensPokestopsRepository itensPokestopsRepository;
 
     @Override
+    @Profile("!test")
     public void run(String... args) throws Exception {
 
         Attacks attackFlameBurst = Attacks.builder().name("Flame Burst").type("Fire").damage(12).isCharged(false).build();
@@ -181,18 +182,18 @@ public class DatabaseSeeder implements CommandLineRunner {
                 pokemonMelmetal, pokemonSlaking, pokemonRhyperior, pokemonGyarados, pokemonSalamance));
 
 
-        User user1 = User.builder().email("Fernando@gmail.com").password("rM74%7^Ocnv%").build();
-        User user2 = User.builder().email("Cesar@gmail.com").password("w4B0!u4bA%&^").build();
-        User user3 = User.builder().email("Carlos@gmail.com").password("ipYD9)6?uh9K").build();
-        User user4 = User.builder().email("yangonogueira.martins6@yahoo.com").password("28E~kVR$V6rH").build();
-        User user5 = User.builder().email("nbiabraga_xavier@yahoo.com").password("&7bt7vX96k!D").build();
-        User user6 = User.builder().email("saranogueira40@live.com").password("J053@e9F7^#X").build();
-        User user7 = User.builder().email("calebemacedo.albuquerque@yahoo.com").password("w[VK5V920^it").build();
-        User user8 = User.builder().email("denevalxavier24@bol.com.br").password("oTwu7}2DcW4!").build();
-        User user9 = User.builder().email("lorrainesilva_macedo@bol.com.br").password("]57cD!2GUw£f").build();
-        User user10 = User.builder().email("flixsilva40@live.com").password("6M4n>2NV0Z{*").build();
+//        User user1 = User.builder().email("Fernando@gmail.com").password("rM74%7^Ocnv%").build();
+//        User user2 = User.builder().email("Cesar@gmail.com").password("w4B0!u4bA%&^").build();
+//        User user3 = User.builder().email("Carlos@gmail.com").password("ipYD9)6?uh9K").build();
+//        User user4 = User.builder().email("yangonogueira.martins6@yahoo.com").password("28E~kVR$V6rH").build();
+//        User user5 = User.builder().email("nbiabraga_xavier@yahoo.com").password("&7bt7vX96k!D").build();
+//        User user6 = User.builder().email("saranogueira40@live.com").password("J053@e9F7^#X").build();
+//        User user7 = User.builder().email("calebemacedo.albuquerque@yahoo.com").password("w[VK5V920^it").build();
+//        User user8 = User.builder().email("denevalxavier24@bol.com.br").password("oTwu7}2DcW4!").build();
+//        User user9 = User.builder().email("lorrainesilva_macedo@bol.com.br").password("]57cD!2GUw£f").build();
+//        User user10 = User.builder().email("flixsilva40@live.com").password("6M4n>2NV0Z{*").build();
 
-        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
+//        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
 
         Itens item1 = Itens.builder()
                 .name("Potion")
@@ -266,19 +267,19 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         itensRepository.saveAll(List.of(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10));
 
-        PokemonAttacks pokemonAttack1 = PokemonAttacks.builder().attacks(attackConfusion).pokemon(pokemonMewtwo).build();
-        PokemonAttacks pokemonAttack2 = PokemonAttacks.builder().attacks(attackOutrage).pokemon(pokemonDragonite).build();
-        PokemonAttacks pokemonAttack3 = PokemonAttacks.builder().attacks(attackDragonTail).pokemon(pokemonSalamance).build();
-        PokemonAttacks pokemonAttack4 = PokemonAttacks.builder().attacks(attackHydroPump).pokemon(pokemonGyarados).build();
-        PokemonAttacks pokemonAttack5 = PokemonAttacks.builder().attacks(attackEarthquake).pokemon(pokemonRhyperior).build();
-        PokemonAttacks pokemonAttack6 = PokemonAttacks.builder().attacks(attackEarthquake).pokemon(pokemonSlaking).build();
-        PokemonAttacks pokemonAttack7 = PokemonAttacks.builder().attacks(attackFlameBurst).pokemon(pokemonCharmander).build();
-        PokemonAttacks pokemonAttack8 = PokemonAttacks.builder().attacks(attackFlameBurst).pokemon(pokemonCharmeleon).build();
-        PokemonAttacks pokemonAttack9 = PokemonAttacks.builder().attacks(attackThunderShock).pokemon(pokemonPikachu).build();
-        PokemonAttacks pokemonAttack10 = PokemonAttacks.builder().attacks(attackHyperBeam).pokemon(pokemonMelmetal).build();
-
-        pokemonAttacksRepository.saveAll(List.of(pokemonAttack1, pokemonAttack2, pokemonAttack3, pokemonAttack4, pokemonAttack5,
-                pokemonAttack6, pokemonAttack7, pokemonAttack8, pokemonAttack9, pokemonAttack10));
+//        PokemonAttacks pokemonAttack1 = PokemonAttacks.builder().attacks(attackConfusion).pokemon(pokemonMewtwo).build();
+//        PokemonAttacks pokemonAttack2 = PokemonAttacks.builder().attacks(attackOutrage).pokemon(pokemonDragonite).build();
+//        PokemonAttacks pokemonAttack3 = PokemonAttacks.builder().attacks(attackDragonTail).pokemon(pokemonSalamance).build();
+//        PokemonAttacks pokemonAttack4 = PokemonAttacks.builder().attacks(attackHydroPump).pokemon(pokemonGyarados).build();
+//        PokemonAttacks pokemonAttack5 = PokemonAttacks.builder().attacks(attackEarthquake).pokemon(pokemonRhyperior).build();
+//        PokemonAttacks pokemonAttack6 = PokemonAttacks.builder().attacks(attackEarthquake).pokemon(pokemonSlaking).build();
+//        PokemonAttacks pokemonAttack7 = PokemonAttacks.builder().attacks(attackFlameBurst).pokemon(pokemonCharmander).build();
+//        PokemonAttacks pokemonAttack8 = PokemonAttacks.builder().attacks(attackFlameBurst).pokemon(pokemonCharmeleon).build();
+//        PokemonAttacks pokemonAttack9 = PokemonAttacks.builder().attacks(attackThunderShock).pokemon(pokemonPikachu).build();
+//        PokemonAttacks pokemonAttack10 = PokemonAttacks.builder().attacks(attackHyperBeam).pokemon(pokemonMelmetal).build();
+//
+//        pokemonAttacksRepository.saveAll(List.of(pokemonAttack1, pokemonAttack2, pokemonAttack3, pokemonAttack4, pokemonAttack5,
+//                pokemonAttack6, pokemonAttack7, pokemonAttack8, pokemonAttack9, pokemonAttack10));
 
 
         Gym gym1 = Gym.builder()
@@ -335,113 +336,113 @@ public class DatabaseSeeder implements CommandLineRunner {
         gymRepository.saveAll(List.of(gym1, gym2, gym3, gym4, gym5, gym6, gym7, gym8, gym9, gym10));
 
 
-        Trainers trainer1 = Trainers.builder().insignias("Bolo de aniversário").level(32).name("koffee").user(user1).build();
-        Trainers trainer2 = Trainers.builder().insignias("Padre Anchieta").level(22).name("Ritzoff").user(user2).build();
-        Trainers trainer3 = Trainers.builder().insignias("Graffiti bom dia em").level(32).name("Succinctmann").user(user3).build();
-        Trainers trainer4 = Trainers.builder().insignias("Escola de Musica Nelsom").level(32).name("Viasuccinct").user(user4).build();
-        Trainers trainer5 = Trainers.builder().insignias("Pintura MUlher Verde Na Ginástica").level(32).name("Exuberantlitz").user(user5).build();
-        Trainers trainer6 = Trainers.builder().insignias("Grafite O Filme Antigo").level(32).name("Vaisquawk").user(user6).build();
-        Trainers trainer7 = Trainers.builder().insignias("Escola Jodé Scaramelli").level(32).name("ExusquWknt").user(user7).build();
-        Trainers trainer8 = Trainers.builder().insignias("Garoto dentuço").level(32).name("Amuckney").user(user8).build();
-        Trainers trainer9 = Trainers.builder().insignias("Boneco da praça").level(32).name("MillyAffirmed").user(user9).build();
-        Trainers trainer10 = Trainers.builder().insignias("Campinho de futebol vila augusta").level(32).name("HabmiaOwal").user(user10).build();
+//        Trainers trainer1 = Trainers.builder().insignias("Bolo de aniversário").level(32).name("koffee").user(user1).build();
+//        Trainers trainer2 = Trainers.builder().insignias("Padre Anchieta").level(22).name("Ritzoff").user(user2).build();
+//        Trainers trainer3 = Trainers.builder().insignias("Graffiti bom dia em").level(32).name("Succinctmann").user(user3).build();
+//        Trainers trainer4 = Trainers.builder().insignias("Escola de Musica Nelsom").level(32).name("Viasuccinct").user(user4).build();
+//        Trainers trainer5 = Trainers.builder().insignias("Pintura MUlher Verde Na Ginástica").level(32).name("Exuberantlitz").user(user5).build();
+//        Trainers trainer6 = Trainers.builder().insignias("Grafite O Filme Antigo").level(32).name("Vaisquawk").user(user6).build();
+//        Trainers trainer7 = Trainers.builder().insignias("Escola Jodé Scaramelli").level(32).name("ExusquWknt").user(user7).build();
+//        Trainers trainer8 = Trainers.builder().insignias("Garoto dentuço").level(32).name("Amuckney").user(user8).build();
+//        Trainers trainer9 = Trainers.builder().insignias("Boneco da praça").level(32).name("MillyAffirmed").user(user9).build();
+//        Trainers trainer10 = Trainers.builder().insignias("Campinho de futebol vila augusta").level(32).name("HabmiaOwal").user(user10).build();
+//
+//        trainersRepository.saveAll(List.of(trainer1,trainer2, trainer3, trainer4, trainer5, trainer6, trainer7, trainer8, trainer9, trainer10));
+//
+//        TrainersGym trainersGym1 = TrainersGym.builder().trainers(trainer1).gym(gym1).build();
+//        TrainersGym trainersGym2 = TrainersGym.builder().trainers(trainer2).gym(gym2).build();
+//        TrainersGym trainersGym3 = TrainersGym.builder().trainers(trainer3).gym(gym3).build();
+//        TrainersGym trainersGym4 = TrainersGym.builder().trainers(trainer4).gym(gym4).build();
+//        TrainersGym trainersGym5 = TrainersGym.builder().trainers(trainer5).gym(gym5).build();
+//        TrainersGym trainersGym6 = TrainersGym.builder().trainers(trainer6).gym(gym6).build();
+//        TrainersGym trainersGym7 = TrainersGym.builder().trainers(trainer7).gym(gym7).build();
+//        TrainersGym trainersGym8 = TrainersGym.builder().trainers(trainer8).gym(gym8).build();
+//        TrainersGym trainersGym9 = TrainersGym.builder().trainers(trainer9).gym(gym9).build();
+//        TrainersGym trainersGym10 = TrainersGym.builder().trainers(trainer10).gym(gym10).build();
+//
+//        trainersGymRepository.saveAll(List.of(trainersGym1, trainersGym2, trainersGym3, trainersGym4, trainersGym5, trainersGym6,
+//                trainersGym7, trainersGym8, trainersGym9,trainersGym10));
 
-        trainersRepository.saveAll(List.of(trainer1,trainer2, trainer3, trainer4, trainer5, trainer6, trainer7, trainer8, trainer9, trainer10));
-
-        TrainersGym trainersGym1 = TrainersGym.builder().trainers(trainer1).gym(gym1).build();
-        TrainersGym trainersGym2 = TrainersGym.builder().trainers(trainer2).gym(gym2).build();
-        TrainersGym trainersGym3 = TrainersGym.builder().trainers(trainer3).gym(gym3).build();
-        TrainersGym trainersGym4 = TrainersGym.builder().trainers(trainer4).gym(gym4).build();
-        TrainersGym trainersGym5 = TrainersGym.builder().trainers(trainer5).gym(gym5).build();
-        TrainersGym trainersGym6 = TrainersGym.builder().trainers(trainer6).gym(gym6).build();
-        TrainersGym trainersGym7 = TrainersGym.builder().trainers(trainer7).gym(gym7).build();
-        TrainersGym trainersGym8 = TrainersGym.builder().trainers(trainer8).gym(gym8).build();
-        TrainersGym trainersGym9 = TrainersGym.builder().trainers(trainer9).gym(gym9).build();
-        TrainersGym trainersGym10 = TrainersGym.builder().trainers(trainer10).gym(gym10).build();
-
-        trainersGymRepository.saveAll(List.of(trainersGym1, trainersGym2, trainersGym3, trainersGym4, trainersGym5, trainersGym6,
-                trainersGym7, trainersGym8, trainersGym9,trainersGym10));
-
-        Capture capture1 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("48.3124, 173.5974")
-                .pokemon(pokemonCharmander)
-                .trainers(trainer1)
-                .build()
-                ;
-        Capture capture2 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-28.8534, 167.2264")
-                .pokemon(pokemonMewtwo)
-                .trainers(trainer2)
-                .build()
-                ;
-
-        Capture capture3 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-52.2805, 114.7877")
-                .pokemon(pokemonDragonite)
-                .trainers(trainer3)
-                .build()
-                ;
-
-        Capture capture4 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-81.0158, 132.0772")
-                .pokemon(pokemonCharmander)
-                .trainers(trainer4)
-                .build()
-                ;
-
-        Capture capture5 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-73.6828, 53.2301")
-                .pokemon(pokemonRhyperior)
-                .trainers(trainer5)
-                .build()
-                ;
-
-        Capture capture6 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("24.6808, 61.9504")
-                .pokemon(pokemonSalamance)
-                .trainers(trainer6)
-                .build()
-                ;
-
-        Capture capture7 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-21.2315, -6.2355")
-                .pokemon(pokemonSlaking)
-                .trainers(trainer7)
-                .build()
-                ;
-
-        Capture capture8 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-22.0012, 80.7671")
-                .pokemon(pokemonGyarados)
-                .trainers(trainer8)
-                .build()
-                ;
-
-        Capture capture9 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-75.4812, 75.5511")
-                .pokemon(pokemonPikachu)
-                .trainers(trainer9)
-                .build()
-                ;
-
-        Capture capture10 = Capture.builder()
-                .date_capture(LocalDate.now())
-                .capture_location("-32.1050, -98.5611")
-                .pokemon(pokemonSlaking)
-                .trainers(trainer10)
-                .build()
-                ;
-
-        captureRepository.saveAll(List.of(capture1, capture2, capture3, capture4, capture5, capture6, capture7, capture8, capture9, capture10));
+//        Capture capture1 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("48.3124, 173.5974")
+//                .pokemon(pokemonCharmander)
+//                .trainers(trainer1)
+//                .build()
+//                ;
+//        Capture capture2 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-28.8534, 167.2264")
+//                .pokemon(pokemonMewtwo)
+//                .trainers(trainer2)
+//                .build()
+//                ;
+//
+//        Capture capture3 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-52.2805, 114.7877")
+//                .pokemon(pokemonDragonite)
+//                .trainers(trainer3)
+//                .build()
+//                ;
+//
+//        Capture capture4 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-81.0158, 132.0772")
+//                .pokemon(pokemonCharmander)
+//                .trainers(trainer4)
+//                .build()
+//                ;
+//
+//        Capture capture5 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-73.6828, 53.2301")
+//                .pokemon(pokemonRhyperior)
+//                .trainers(trainer5)
+//                .build()
+//                ;
+//
+//        Capture capture6 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("24.6808, 61.9504")
+//                .pokemon(pokemonSalamance)
+//                .trainers(trainer6)
+//                .build()
+//                ;
+//
+//        Capture capture7 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-21.2315, -6.2355")
+//                .pokemon(pokemonSlaking)
+//                .trainers(trainer7)
+//                .build()
+//                ;
+//
+//        Capture capture8 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-22.0012, 80.7671")
+//                .pokemon(pokemonGyarados)
+//                .trainers(trainer8)
+//                .build()
+//                ;
+//
+//        Capture capture9 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-75.4812, 75.5511")
+//                .pokemon(pokemonPikachu)
+//                .trainers(trainer9)
+//                .build()
+//                ;
+//
+//        Capture capture10 = Capture.builder()
+//                .date_capture(LocalDate.now())
+//                .capture_location("-32.1050, -98.5611")
+//                .pokemon(pokemonSlaking)
+//                .trainers(trainer10)
+//                .build()
+//                ;
+//
+//        captureRepository.saveAll(List.of(capture1, capture2, capture3, capture4, capture5, capture6, capture7, capture8, capture9, capture10));
 
         Pokestops pokestop1 = Pokestops.builder()
                 .name("Parque infantil")
@@ -494,34 +495,39 @@ public class DatabaseSeeder implements CommandLineRunner {
         pokestopsRepository.saveAll(List.of(pokestop1, pokestop2, pokestop3, pokestop4, pokestop5,
                 pokestop6, pokestop7, pokestop8, pokestop9, pokestop10));
 
+//
+//        PokestopsTrainers pokestopsTrainers1 = PokestopsTrainers.builder().pokestops(pokestop1).trainers(trainer1).build();
+//        PokestopsTrainers pokestopsTrainers2 = PokestopsTrainers.builder().pokestops(pokestop2).trainers(trainer2).build();
+//        PokestopsTrainers pokestopsTrainers3 = PokestopsTrainers.builder().pokestops(pokestop3).trainers(trainer3).build();
+//        PokestopsTrainers pokestopsTrainers4 = PokestopsTrainers.builder().pokestops(pokestop4).trainers(trainer4).build();
+//        PokestopsTrainers pokestopsTrainers5 = PokestopsTrainers.builder().pokestops(pokestop5).trainers(trainer5).build();
+//        PokestopsTrainers pokestopsTrainers6 = PokestopsTrainers.builder().pokestops(pokestop6).trainers(trainer6).build();
+//        PokestopsTrainers pokestopsTrainers7 = PokestopsTrainers.builder().pokestops(pokestop7).trainers(trainer7).build();
+//        PokestopsTrainers pokestopsTrainers8 = PokestopsTrainers.builder().pokestops(pokestop8).trainers(trainer8).build();
+//        PokestopsTrainers pokestopsTrainers9 = PokestopsTrainers.builder().pokestops(pokestop9).trainers(trainer9).build();
+//        PokestopsTrainers pokestopsTrainers10 = PokestopsTrainers.builder().pokestops(pokestop10).trainers(trainer10).build();
+//
+//        pokestopsTrainersRepository.saveAll(List.of(pokestopsTrainers1,pokestopsTrainers2, pokestopsTrainers3 ,pokestopsTrainers4, pokestopsTrainers5,
+//                pokestopsTrainers6, pokestopsTrainers7,pokestopsTrainers8,pokestopsTrainers9, pokestopsTrainers10));
 
-        PokestopsTrainers pokestopsTrainers1 = PokestopsTrainers.builder().pokestops(pokestop1).trainers(trainer1).build();
-        PokestopsTrainers pokestopsTrainers2 = PokestopsTrainers.builder().pokestops(pokestop2).trainers(trainer2).build();
-        PokestopsTrainers pokestopsTrainers3 = PokestopsTrainers.builder().pokestops(pokestop3).trainers(trainer3).build();
-        PokestopsTrainers pokestopsTrainers4 = PokestopsTrainers.builder().pokestops(pokestop4).trainers(trainer4).build();
-        PokestopsTrainers pokestopsTrainers5 = PokestopsTrainers.builder().pokestops(pokestop5).trainers(trainer5).build();
-        PokestopsTrainers pokestopsTrainers6 = PokestopsTrainers.builder().pokestops(pokestop6).trainers(trainer6).build();
-        PokestopsTrainers pokestopsTrainers7 = PokestopsTrainers.builder().pokestops(pokestop7).trainers(trainer7).build();
-        PokestopsTrainers pokestopsTrainers8 = PokestopsTrainers.builder().pokestops(pokestop8).trainers(trainer8).build();
-        PokestopsTrainers pokestopsTrainers9 = PokestopsTrainers.builder().pokestops(pokestop9).trainers(trainer9).build();
-        PokestopsTrainers pokestopsTrainers10 = PokestopsTrainers.builder().pokestops(pokestop10).trainers(trainer10).build();
+//        ItensPokestops itemPokestops1 = ItensPokestops.builder().itens(item1).pokestops(pokestop1).build();
+//        ItensPokestops itemPokestops2 = ItensPokestops.builder().itens(item2).pokestops(pokestop2).build();
+//        ItensPokestops itemPokestops3 = ItensPokestops.builder().itens(item3).pokestops(pokestop3).build();
+//        ItensPokestops itemPokestops4 = ItensPokestops.builder().itens(item4).pokestops(pokestop4).build();
+//        ItensPokestops itemPokestops5 = ItensPokestops.builder().itens(item5).pokestops(pokestop5).build();
+//        ItensPokestops itemPokestops6 = ItensPokestops.builder().itens(item6).pokestops(pokestop6).build();
+//        ItensPokestops itemPokestops7 = ItensPokestops.builder().itens(item7).pokestops(pokestop7).build();
+//        ItensPokestops itemPokestops8 = ItensPokestops.builder().itens(item8).pokestops(pokestop8).build();
+//        ItensPokestops itemPokestops9 = ItensPokestops.builder().itens(item9).pokestops(pokestop9).build();
+//        ItensPokestops itemPokestops10 = ItensPokestops.builder().itens(item10).pokestops(pokestop10).build();
+//
+//        itensPokestopsRepository.saveAll(List.of(itemPokestops1, itemPokestops2, itemPokestops3, itemPokestops4, itemPokestops5 ,itemPokestops6,
+//                itemPokestops7, itemPokestops8, itemPokestops9, itemPokestops10));
 
-        pokestopsTrainersRepository.saveAll(List.of(pokestopsTrainers1,pokestopsTrainers2, pokestopsTrainers3 ,pokestopsTrainers4, pokestopsTrainers5,
-                pokestopsTrainers6, pokestopsTrainers7,pokestopsTrainers8,pokestopsTrainers9, pokestopsTrainers10));
+    }
 
-        ItensPokestops itemPokestops1 = ItensPokestops.builder().itens(item1).pokestops(pokestop1).build();
-        ItensPokestops itemPokestops2 = ItensPokestops.builder().itens(item2).pokestops(pokestop2).build();
-        ItensPokestops itemPokestops3 = ItensPokestops.builder().itens(item3).pokestops(pokestop3).build();
-        ItensPokestops itemPokestops4 = ItensPokestops.builder().itens(item4).pokestops(pokestop4).build();
-        ItensPokestops itemPokestops5 = ItensPokestops.builder().itens(item5).pokestops(pokestop5).build();
-        ItensPokestops itemPokestops6 = ItensPokestops.builder().itens(item6).pokestops(pokestop6).build();
-        ItensPokestops itemPokestops7 = ItensPokestops.builder().itens(item7).pokestops(pokestop7).build();
-        ItensPokestops itemPokestops8 = ItensPokestops.builder().itens(item8).pokestops(pokestop8).build();
-        ItensPokestops itemPokestops9 = ItensPokestops.builder().itens(item9).pokestops(pokestop9).build();
-        ItensPokestops itemPokestops10 = ItensPokestops.builder().itens(item10).pokestops(pokestop10).build();
-
-        itensPokestopsRepository.saveAll(List.of(itemPokestops1, itemPokestops2, itemPokestops3, itemPokestops4, itemPokestops5 ,itemPokestops6,
-                itemPokestops7, itemPokestops8, itemPokestops9, itemPokestops10));
+    @Profile("test")
+    public void runTest(String... args) throws Exception {
 
     }
 }

@@ -40,7 +40,6 @@ public class UserController {
     @Autowired
     TokenJwtService tokenJwtService;
 
-    @Profile("!dev")
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody @Valid User user){
         user.setPassword(encoder.encode(user.getPassword()));
@@ -48,7 +47,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    @Profile("!dev")
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid Credencial credencial){
         manager.authenticate(credencial.toAuthetication());
