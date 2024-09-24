@@ -51,11 +51,11 @@ public class Pokemon {
 
     private int level;
 
-    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PokemonAttacks> pokemonAttacks;
 
-    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Capture> captures;
 

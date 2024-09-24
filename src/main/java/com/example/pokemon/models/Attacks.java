@@ -43,7 +43,7 @@ public class Attacks {
     @NotNull
     private boolean isCharged;
 
-    @OneToMany(mappedBy = "attacks", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "attacks", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PokemonAttacks> pokemonAttacks;
 

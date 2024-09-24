@@ -40,7 +40,7 @@ public class Itens {
     private String quantity;
 
 
-    @OneToMany(mappedBy = "itens", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "itens", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<ItensPokestops> itensPokestops;
 

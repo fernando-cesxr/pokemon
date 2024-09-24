@@ -35,7 +35,7 @@ public class Gym {
     @NotNull
     private String insignia;
 
-    @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<TrainersGym> trainersGyms;
 

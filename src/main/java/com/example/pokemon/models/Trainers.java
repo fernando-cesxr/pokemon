@@ -37,15 +37,15 @@ public class Trainers {
     @NotNull
     private int level;
 
-    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Capture> captures;
 
-    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<TrainersGym> trainersGyms;
 
-    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PokestopsTrainers> pokestopTrainers;
 

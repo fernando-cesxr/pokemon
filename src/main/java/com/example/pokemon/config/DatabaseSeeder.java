@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
+@Profile("!test")
 public class DatabaseSeeder implements CommandLineRunner {
 
     @Autowired
@@ -50,7 +51,6 @@ public class DatabaseSeeder implements CommandLineRunner {
     ItensPokestopsRepository itensPokestopsRepository;
 
     @Override
-    @Profile("!test")
     public void run(String... args) throws Exception {
 
         Attacks attackFlameBurst = Attacks.builder().name("Flame Burst").type("Fire").damage(12).isCharged(false).build();
@@ -523,11 +523,6 @@ public class DatabaseSeeder implements CommandLineRunner {
 //
 //        itensPokestopsRepository.saveAll(List.of(itemPokestops1, itemPokestops2, itemPokestops3, itemPokestops4, itemPokestops5 ,itemPokestops6,
 //                itemPokestops7, itemPokestops8, itemPokestops9, itemPokestops10));
-
-    }
-
-    @Profile("test")
-    public void runTest(String... args) throws Exception {
 
     }
 }

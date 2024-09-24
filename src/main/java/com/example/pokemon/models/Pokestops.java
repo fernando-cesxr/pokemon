@@ -33,11 +33,11 @@ public class Pokestops {
     @NotNull
     private String location;
 
-    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<ItensPokestops> itensPokestops;
 
-    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pokestops", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PokestopsTrainers> pokestopTrainers;
 
