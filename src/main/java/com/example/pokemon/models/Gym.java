@@ -3,7 +3,7 @@ package com.example.pokemon.models;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import com.example.pokemon.controller.GymController;
+import com.example.pokemon.controllers.GymController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

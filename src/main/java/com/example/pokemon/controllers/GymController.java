@@ -1,4 +1,4 @@
-package com.example.pokemon.controller;
+package com.example.pokemon.controllers;
 
 import com.example.pokemon.exceptions.RestNotFoundException;
 import com.example.pokemon.models.Gym;
@@ -14,8 +14,6 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.parser.Entity;
 
 @RestController
 @RequestMapping("/api/gyms")

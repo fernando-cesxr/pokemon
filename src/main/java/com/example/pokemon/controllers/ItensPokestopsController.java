@@ -1,13 +1,11 @@
-package com.example.pokemon.controller;
+package com.example.pokemon.controllers;
 
 import com.example.pokemon.exceptions.RestNotFoundException;
-import com.example.pokemon.models.Itens;
 import com.example.pokemon.models.ItensPokestops;
 import com.example.pokemon.repository.ItensPokestopsRepository;
 import com.example.pokemon.repository.ItensRepository;
 import com.example.pokemon.repository.PokestopsRepository;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

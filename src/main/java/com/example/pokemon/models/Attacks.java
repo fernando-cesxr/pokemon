@@ -1,12 +1,8 @@
 package com.example.pokemon.models;
 
 
-import com.example.pokemon.controller.AttackController;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.pokemon.controllers.AttackController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.validation.constraints.Null;
 import org.springframework.hateoas.EntityModel;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;

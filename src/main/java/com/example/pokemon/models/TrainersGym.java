@@ -1,6 +1,6 @@
 package com.example.pokemon.models;
 
-import com.example.pokemon.controller.TrainersGymController;
+import com.example.pokemon.controllers.TrainersGymController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-import java.util.IdentityHashMap;
 
 @Data
 @NoArgsConstructor

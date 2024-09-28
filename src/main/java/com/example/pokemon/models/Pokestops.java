@@ -1,7 +1,6 @@
 package com.example.pokemon.models;
 
-import com.example.pokemon.controller.PokestopsController;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.pokemon.controllers.PokestopsController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

@@ -1,24 +1,20 @@
-package com.example.pokemon.controller.pokemon;
+package com.example.pokemon.controllers.pokemon;
 
 import com.example.pokemon.models.Pokemon;
 import com.example.pokemon.repository.PokemonRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,11 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class PokemonGetAllTest {
+public class PokemonSaveTest {
 
-    @Mock
+    @MockBean
     PokemonRepository pokemonRepository;
 
     @Autowired
@@ -55,14 +50,14 @@ public class PokemonGetAllTest {
     };
 
     @Test
-    public void test_GetAllPokemon() throws Exception {
-        when(pokemonRepository.findAll()).thenReturn(List.of(pokemonGarchomp));
-        mockMvc.perform(get("/api/pokemons")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+    public void test_savePokemon() throws Exception {
+
+        when(pokemonRepository.save(pokemonGarchomp)).thenReturn(pokemonGarchomp);
+        mockMvc.perform(post("/api/pokemons")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(pokemonGarchomp)))
+                .andExpect(status().isCreated());
     }
-
-
 
 }
 

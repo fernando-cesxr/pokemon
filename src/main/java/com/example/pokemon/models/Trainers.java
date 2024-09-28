@@ -1,15 +1,13 @@
 package com.example.pokemon.models;
 
 
-import com.example.pokemon.controller.TrainerController;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.pokemon.controllers.TrainerController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.websocket.OnMessage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

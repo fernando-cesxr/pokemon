@@ -1,7 +1,7 @@
-package com.example.pokemon.controller.pokemon;
+package com.example.pokemon.controllers.user;
 
-import com.example.pokemon.models.Pokemon;
-import com.example.pokemon.repository.PokemonRepository;
+import com.example.pokemon.models.User;
+import com.example.pokemon.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,39 +24,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class PokemonGetByIdTest {
+public class UserGetByIdTest {
 
     @MockBean
-    private PokemonRepository pokemonRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private Pokemon pokemonGarchomp;
+    private User user;
 
     @BeforeEach
     public void setup() {
-        pokemonGarchomp = Pokemon.builder()
-                .name("Garchomp")
-                .type("Dragon/Ground")
-                .height(1.90)
-                .firstAttack("Earthquake")
-                .secondAttack("Dragon Claw")
-                .nr_Attack(15)
-                .nr_Defense(12)
-                .nr_Hp(200)
-                .level(42)
+        user = User.builder()
+                .email("example@example.com")
+                .password("SecureP@ssw0rd!")
                 .build();
     }
 
-
     @Test
     public void test_GetByIdPokemon() throws Exception {
-        when(pokemonRepository.findById(1L)).thenReturn(Optional.of(pokemonGarchomp));
-        mockMvc.perform(get("/api/pokemons/{id}", 1L)
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        mockMvc.perform(get("/api/users/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Garchomp"));
+                .andExpect(jsonPath("$.email").value("example@example.com"));
     };
 
 }

@@ -1,14 +1,12 @@
-package com.example.pokemon.controller;
+package com.example.pokemon.controllers;
 
 import com.example.pokemon.exceptions.RestNotFoundException;
 import com.example.pokemon.models.Credencial;
-import com.example.pokemon.models.Trainers;
 import com.example.pokemon.models.User;
 import com.example.pokemon.repository.UserRepository;
 import com.example.pokemon.service.TokenJwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

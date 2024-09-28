@@ -1,20 +1,15 @@
 package com.example.pokemon.models;
 
-import com.example.pokemon.controller.PokemonAttacksController;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.pokemon.controllers.PokemonAttacksController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.hateoas.EntityModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor

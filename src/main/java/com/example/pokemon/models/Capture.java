@@ -1,10 +1,9 @@
 package com.example.pokemon.models;
 
 
-import com.example.pokemon.controller.CaptureController;
+import com.example.pokemon.controllers.CaptureController;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

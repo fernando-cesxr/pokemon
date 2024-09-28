@@ -1,7 +1,6 @@
 package com.example.pokemon.models;
 
-import com.example.pokemon.controller.ItensController;
-import com.example.pokemon.controller.ItensPokestopsController;
+import com.example.pokemon.controllers.ItensPokestopsController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

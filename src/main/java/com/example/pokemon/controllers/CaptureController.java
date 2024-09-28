@@ -1,4 +1,4 @@
-package com.example.pokemon.controller;
+package com.example.pokemon.controllers;
 
 import com.example.pokemon.exceptions.RestNotFoundException;
 import com.example.pokemon.models.Capture;
