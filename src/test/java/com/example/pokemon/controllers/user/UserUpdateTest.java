@@ -45,7 +45,7 @@ public class UserUpdateTest {
 
 
     @Test
-    public void test_UpdateUser_Success() throws Exception{
+    public void test_Update_Success() throws Exception{
 
         String email = "cesar@gmail.com";
         String password = "rM74%7^Ocnv%";

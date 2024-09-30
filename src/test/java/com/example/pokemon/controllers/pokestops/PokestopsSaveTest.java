@@ -1,9 +1,7 @@
-package com.example.pokemon.controllers.attacks;
+package com.example.pokemon.controllers.pokestops;
 
-import com.example.pokemon.models.Attacks;
-import com.example.pokemon.models.Pokemon;
-import com.example.pokemon.repository.AttacksRepository;
-import com.example.pokemon.repository.PokemonRepository;
+import com.example.pokemon.models.Pokestops;
+import com.example.pokemon.repository.PokestopsRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,40 +15,41 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AttackSaveTest {
+public class PokestopsSaveTest {
 
     @MockBean
-    AttacksRepository attacksRepository;
+    private PokestopsRepository pokestopsRepository;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    private Attacks attacks;
+    private Pokestops pokestops;
+
 
     @BeforeEach
-    public void setup() {
-        attacks = Attacks.builder()
-                .name("Ice Beam")
-                .type("Ice")
-                .damage(90)
-                .isCharged(true)  // This is a charged move
+    public void setup(){
+        pokestops = Pokestops.builder()
+                .name("Parque infantil")
+                .description("Local de diversão para crianças")
+                .location("-34.8628, 25.7879")
                 .build();
     }
+
 
     @Test
     public void test_save() throws Exception {
 
-        when(attacksRepository.save(attacks)).thenReturn(attacks);
-        mockMvc.perform(post("/api/attacks")
+        when(pokestopsRepository.save(pokestops)).thenReturn(pokestops);
+        mockMvc.perform(post("/api/pokestops")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(attacks)))
+                        .content(new ObjectMapper().writeValueAsString(pokestops)))
                 .andExpect(status().isCreated());
     }
+
 
 }

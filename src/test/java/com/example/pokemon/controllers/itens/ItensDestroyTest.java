@@ -1,9 +1,10 @@
-package com.example.pokemon.controllers.user;
+package com.example.pokemon.controllers.itens;
 
-import com.example.pokemon.models.User;
-import com.example.pokemon.repository.UserRepository;
+import com.example.pokemon.models.Itens;
+import com.example.pokemon.repository.ItensRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,38 +18,42 @@ import java.util.Optional;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class UserGetByIdTest {
+public class ItensDestroyTest {
 
     @MockBean
-    private UserRepository userRepository;
+    private ItensRepository itensRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private User user;
+    private Itens itens;
 
     @BeforeEach
-    public void setup() {
-        user = User.builder()
-                .email("example@example.com")
-                .password("SecureP@ssw0rd!")
+    public void setup(){
+        itens = Itens.builder()
+                .name("Potion")
+                .description("Restores a small amount of HP.")
+                .type("Health")
+                .quantity("5")
                 .build();
+
     }
 
+
     @Test
-    public void test_GetById() throws Exception {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        mockMvc.perform(get("/api/users/{id}", 1L)
+    public void test_Destroy_Success() throws Exception {
+
+        when(itensRepository.findById(1L)).thenReturn(Optional.of(itens));
+        when(itensRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(itensRepository).delete(itens);
+        mockMvc.perform(delete("/api/itens/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("example@example.com"));
-    };
+                .andExpect(status().isNoContent());
+    }
 
 }

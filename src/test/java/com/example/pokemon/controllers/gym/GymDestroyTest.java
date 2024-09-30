@@ -1,9 +1,10 @@
-package com.example.pokemon.controllers.user;
+package com.example.pokemon.controllers.gym;
 
-import com.example.pokemon.models.User;
-import com.example.pokemon.repository.UserRepository;
+import com.example.pokemon.models.Gym;
+import com.example.pokemon.repository.GymRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,38 +18,39 @@ import java.util.Optional;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class UserGetByIdTest {
+public class GymDestroyTest {
 
     @MockBean
-    private UserRepository userRepository;
+    private GymRepository gymRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private User user;
+    private Gym gym;
 
     @BeforeEach
-    public void setup() {
-        user = User.builder()
-                .email("example@example.com")
-                .password("SecureP@ssw0rd!")
+    public void setup(){
+        gym = Gym.builder()
+                .name("Campinho de futebol vila augusta")
+                .location("-7.1873, 116.0633")
+                .insignia("Campinho de futebol vila augusta")
                 .build();
     }
 
     @Test
-    public void test_GetById() throws Exception {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        mockMvc.perform(get("/api/users/{id}", 1L)
+    public void test_Destroy_Success() throws Exception {
+        when(gymRepository.findById(1L)).thenReturn(Optional.of(gym));
+        when(gymRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(gymRepository).delete(gym);
+        mockMvc.perform(delete("/api/gyms/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("example@example.com"));
-    };
+                .andExpect(status().isNoContent());
+    }
+
 
 }

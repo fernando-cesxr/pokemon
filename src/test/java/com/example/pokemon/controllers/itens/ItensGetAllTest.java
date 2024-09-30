@@ -1,8 +1,8 @@
-package com.example.pokemon.controllers.user;
+package com.example.pokemon.controllers.itens;
 
-
-import com.example.pokemon.models.User;
-import com.example.pokemon.repository.UserRepository;
+import com.example.pokemon.models.Attacks;
+import com.example.pokemon.models.Itens;
+import com.example.pokemon.repository.ItensRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -23,29 +23,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class UserGetAllTest {
+public class ItensGetAllTest {
 
     @Mock
-    private UserRepository userRepository;
+    private ItensRepository itensRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private User user;
+    private Itens itens;
 
 
     @BeforeEach
-    public void setup() {
-        user = User.builder()
-                .email("example@example.com")
-                .password("SecureP@ssw0rd!")
+    public void setup(){
+        itens = Itens.builder()
+                .name("Potion")
+                .description("Restores a small amount of HP.")
+                .type("Health")
+                .quantity("5")
                 .build();
     }
 
     @Test
-    public void test_GetAll() throws Exception {
-        when(userRepository.findAll()).thenReturn(List.of(user));
-        mockMvc.perform(get("/api/users")
+    public void test_GetAll() throws Exception{
+        when(itensRepository.findAll()).thenReturn(List.of(itens));
+        mockMvc.perform(get("/api/itens")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

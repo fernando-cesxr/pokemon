@@ -45,9 +45,8 @@ public class AttackGetAllTest {
     }
 
     @Test
-    public void test_GetAllPokemon() throws Exception {
+    public void test_GetAll() throws Exception {
         when(attacksRepository.findAll()).thenReturn(List.of(attack));
-        List test = List.of(attack);
         mockMvc.perform(get("/api/attacks")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

@@ -1,9 +1,8 @@
-package com.example.pokemon.controllers.attacks;
+package com.example.pokemon.controllers.itens;
 
-import com.example.pokemon.models.Attacks;
-import com.example.pokemon.models.Pokemon;
-import com.example.pokemon.repository.AttacksRepository;
-import com.example.pokemon.repository.PokemonRepository;
+import com.example.pokemon.models.Itens;
+import com.example.pokemon.repository.ItensRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,40 +16,41 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AttackSaveTest {
+public class ItensSaveTest {
 
     @MockBean
-    AttacksRepository attacksRepository;
+    private ItensRepository itensRepository;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    private Attacks attacks;
+    private Itens itens;
 
     @BeforeEach
-    public void setup() {
-        attacks = Attacks.builder()
-                .name("Ice Beam")
-                .type("Ice")
-                .damage(90)
-                .isCharged(true)  // This is a charged move
+    public void setup()  {
+        itens = Itens.builder()
+                .name("Potion")
+                .description("Restores a small amount of HP.")
+                .type("Health")
+                .quantity("5")
                 .build();
+
     }
 
     @Test
     public void test_save() throws Exception {
 
-        when(attacksRepository.save(attacks)).thenReturn(attacks);
-        mockMvc.perform(post("/api/attacks")
+        when(itensRepository.save(itens)).thenReturn(itens);
+        mockMvc.perform(post("/api/itens")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(attacks)))
+                        .content(new ObjectMapper().writeValueAsString(itens)))
                 .andExpect(status().isCreated());
     }
+
 
 }

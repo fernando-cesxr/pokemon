@@ -45,7 +45,7 @@ public class AttackGetByIdTest {
     }
 
     @Test
-    public void test_GetByIdPokemon() throws Exception {
+    public void test_GetById() throws Exception {
         when(attacksRepository.findById(1L)).thenReturn(Optional.of(attack));
         mockMvc.perform(get("/api/attacks/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))

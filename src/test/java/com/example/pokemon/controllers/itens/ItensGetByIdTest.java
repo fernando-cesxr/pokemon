@@ -1,11 +1,10 @@
-package com.example.pokemon.controllers.user;
+package com.example.pokemon.controllers.itens;
 
 
-import com.example.pokemon.models.User;
-import com.example.pokemon.repository.UserRepository;
+import com.example.pokemon.models.Itens;
+import com.example.pokemon.repository.ItensRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,40 +13,44 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class UserGetAllTest {
+public class ItensGetByIdTest {
 
-    @Mock
-    private UserRepository userRepository;
+    @MockBean
+    private ItensRepository itensRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private User user;
-
+    private Itens itens;
 
     @BeforeEach
-    public void setup() {
-        user = User.builder()
-                .email("example@example.com")
-                .password("SecureP@ssw0rd!")
+    public void setup(){
+        itens = Itens.builder()
+                .name("Potion")
+                .description("Restores a small amount of HP.")
+                .type("Health")
+                .quantity("5")
                 .build();
     }
 
     @Test
-    public void test_GetAll() throws Exception {
-        when(userRepository.findAll()).thenReturn(List.of(user));
-        mockMvc.perform(get("/api/users")
+    public void test_GetById() throws Exception {
+        when(itensRepository.findById(1L)).thenReturn(Optional.of(itens));
+        mockMvc.perform(get("/api/itens/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Potion"));
+    };
+
 
 }
