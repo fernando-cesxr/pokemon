@@ -25,16 +25,14 @@ public class GymController {
     @Autowired
     PagedResourcesAssembler assembler;
 
-    @GetMapping
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)  Pageable pageable){
-        Page<Gym> gym = gymRepository.findAll(pageable);
-        return assembler.toModel(gym.map(Gym::toEntityModel));
-    }
 
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName(@RequestParam (required = false)String search,
-                                                      @PageableDefault(size = 10) Pageable pageable){
-        Page<Gym> gym = gymRepository.findByNameContaining(search, pageable);
+    @GetMapping
+    public PagedModel<EntityModel<Object>> index(@RequestParam(required = false)String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Gym> gym = gymRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(gym.map(Gym::toEntityModel));
+        }
+        Page<Gym> gym = gymRepository.findAll(pageable);
         return assembler.toModel(gym.map(Gym::toEntityModel));
     }
 

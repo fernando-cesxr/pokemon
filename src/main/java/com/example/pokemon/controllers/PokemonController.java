@@ -25,15 +25,12 @@ public class PokemonController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)Pageable pageable){
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Pokemon> pokemon = pokemonRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(pokemon.map(Pokemon::toEntityModel));
+        }
         Page<Pokemon> pokemon = pokemonRepository.findAll(pageable);
-        return assembler.toModel(pokemon.map(Pokemon::toEntityModel));
-    }
-
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName(@RequestParam (required = false) String search,
-                                                      @PageableDefault(size = 10) Pageable pageable){
-        Page<Pokemon> pokemon = pokemonRepository.findByNameContaining(search, pageable);
         return assembler.toModel(pokemon.map(Pokemon::toEntityModel));
     }
 

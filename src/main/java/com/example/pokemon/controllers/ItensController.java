@@ -26,20 +26,15 @@ public class ItensController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Itens> itens = itensRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(itens.map(Itens::toEntityModel));
+        }
         Page<Itens> itens = itensRepository.findAll(pageable);
 
         return assembler.toModel(itens.map(Itens::toEntityModel));
     }
-
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName (@RequestParam(required = true)  String search,
-                                                       @PageableDefault (size = 10) Pageable pageable){
-        Page<Itens> itens = itensRepository.findByNameContaining(search, pageable);
-
-        return assembler.toModel(itens.map(Itens::toEntityModel));
-    }
-
     @GetMapping("{id}")
     public EntityModel<Itens> show(@PathVariable Long id){
         var itens = itensRepository.findById(id).orElseThrow(()-> new RestNotFoundException("item not found"));

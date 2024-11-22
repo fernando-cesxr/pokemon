@@ -53,21 +53,22 @@ public class DatabaseSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Attacks attackFlameBurst = Attacks.builder().name("Flame Burst").type("Fire").damage(12).isCharged(false).build();
-        Attacks attackConfusion = Attacks.builder().name("Confusion").type("Psychic").damage(20).isCharged(false).build();
-        Attacks attackPsystrike = Attacks.builder().name("Psystrike").type("Psychic").damage(90).isCharged(true).build();
-        Attacks attackEarthquake = Attacks.builder().name("Earthquake").type("Ground").damage(140).isCharged(true).build();
-        Attacks attackDragonTail = Attacks.builder().name("Dragon Tail").type("Dragon").damage(15).isCharged(false).build();
-        Attacks attackOutrage = Attacks.builder().name("Outrage").type("Dragon").damage(110).isCharged(true).build();
-        Attacks attackThunderShock = Attacks.builder().name("Thunder Shock").type("Eletric").isCharged(false).damage(5).build();
-        Attacks attackHyperBeam = Attacks.builder().name("Hyper Beam").type("Normal").damage(150).isCharged(true).build();
-        Attacks attackWaterfall = Attacks.builder().name("Waterfall").type("Water").damage(16).isCharged(false).build();
-        Attacks attackHydroPump = Attacks.builder().name("Hydro Pump").type("Water").damage(130).isCharged(true).build();
+        Attacks attackFlameBurst = Attacks.builder().id(1L).name("Flame Burst").type("Fire").damage(12).isCharged(false).build();
+        Attacks attackConfusion = Attacks.builder().id(2L).name("Confusion").type("Psychic").damage(20).isCharged(false).build();
+        Attacks attackPsystrike = Attacks.builder().id(3L).name("Psystrike").type("Psychic").damage(90).isCharged(true).build();
+        Attacks attackEarthquake = Attacks.builder().id(4L).name("Earthquake").type("Ground").damage(140).isCharged(true).build();
+        Attacks attackDragonTail = Attacks.builder().id(5L).name("Dragon Tail").type("Dragon").damage(15).isCharged(false).build();
+        Attacks attackOutrage = Attacks.builder().id(6L).name("Outrage").type("Dragon").damage(110).isCharged(true).build();
+        Attacks attackThunderShock = Attacks.builder().id(7L).name("Thunder Shock").type("Eletric").isCharged(false).damage(5).build();
+        Attacks attackHyperBeam = Attacks.builder().id(8L).name("Hyper Beam").type("Normal").damage(150).isCharged(true).build();
+        Attacks attackWaterfall = Attacks.builder().id(9L).name("Waterfall").type("Water").damage(16).isCharged(false).build();
+        Attacks attackHydroPump = Attacks.builder().id(10L).name("Hydro Pump").type("Water").damage(130).isCharged(true).build();
 
-        attacksRepository.saveAll(List.of(attackFlameBurst, attackConfusion, attackPsystrike, attackWaterfall,
-                attackEarthquake, attackHydroPump, attackDragonTail, attackOutrage, attackThunderShock, attackHyperBeam));
+        attacksRepository.saveAll(List.of(attackFlameBurst, attackConfusion, attackPsystrike,
+                attackEarthquake, attackDragonTail, attackOutrage, attackThunderShock, attackHyperBeam ,attackWaterfall, attackHydroPump));
 
         Pokemon pokemonPikachu = Pokemon.builder()
+                .id(1L)
                 .name("Pikachu")
                 .type("Electric")
                 .height(0.72)
@@ -79,6 +80,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(2)
                 .build();
         Pokemon pokemonCharmander = Pokemon.builder()
+                .id(2L)
                 .name("Charmander")
                 .type("fire")
                 .height(0.48)
@@ -90,6 +92,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(3)
                 .build();
         Pokemon pokemonCharmeleon = Pokemon.builder()
+                .id(3L)
                 .name("Charmeleon")
                 .type("fire")
                 .height(1.10)
@@ -101,6 +104,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(23)
                 .build();
         Pokemon pokemonDragonite = Pokemon.builder()
+                .id(4L)
                 .name("Dragonite")
                 .type("Dragon")
                 .height(1.81)
@@ -112,6 +116,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(3)
                 .build();
         Pokemon pokemonMewtwo = Pokemon.builder()
+                .id(5L)
                 .name("Mewtwo")
                 .type("Psychic")
                 .height(15.49)
@@ -123,6 +128,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(50)
                 .build();
         Pokemon pokemonMelmetal = Pokemon.builder()
+                .id(6L)
                 .name("Melmetal")
                 .type("Steel")
                 .height(2.5)
@@ -134,6 +140,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(50)
                 .build();
         Pokemon pokemonSlaking = Pokemon.builder()
+                .id(7L)
                 .name("Slaking")
                 .type("Normal")
                 .height(1.81)
@@ -145,6 +152,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(35)
                 .build();
         Pokemon pokemonRhyperior = Pokemon.builder()
+                .id(8L)
                 .name("Rhyperior")
                 .type("Groud/Rock")
                 .height(2.26)
@@ -156,6 +164,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(35)
                 .build();
         Pokemon pokemonGyarados = Pokemon.builder()
+                .id(9L)
                 .name("Gyarados")
                 .type("Water/Flying")
                 .height(5.91)
@@ -167,6 +176,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .level(32)
                 .build();
         Pokemon pokemonSalamance = Pokemon.builder()
+                .id(10L)
                 .name("Salamance")
                 .type("Dragon/Flying")
                 .height(1.77)
@@ -196,6 +206,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 //        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
 
         Itens item1 = Itens.builder()
+                .id(1L)
                 .name("Potion")
                 .description("Restores a small amount of HP.")
                 .type("Health")
@@ -203,6 +214,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item2 = Itens.builder()
+                .id(2L)
                 .name("Super Potion")
                 .description("Restores a moderate amount of HP.")
                 .type("Health")
@@ -210,6 +222,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item3 = Itens.builder()
+                .id(3L)
                 .name("Pokeball")
                 .description("A device for catching wild Pokémon.")
                 .type("Pokeball")
@@ -217,6 +230,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item4 = Itens.builder()
+                .id(4L)
                 .name("Great Ball")
                 .description("A high-performance Poké Ball with a higher catch rate than a standard Poké Ball.")
                 .type("Pokeball")
@@ -224,6 +238,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item5 = Itens.builder()
+                .id(5L)
                 .name("Hyper Potion")
                 .description("Restores a large amount of HP.")
                 .type("Health")
@@ -231,6 +246,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item6 = Itens.builder()
+                .id(6L)
                 .name("Full Heal")
                 .description("Cures all status conditions of a Pokémon.")
                 .type("Cure")
@@ -238,6 +254,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item7 = Itens.builder()
+                .id(7L)
                 .name("Revive")
                 .description("Revives a fainted Pokémon and restores half of its max HP.")
                 .type("Health")
@@ -245,6 +262,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item8 = Itens.builder()
+                .id(8L)
                 .name("Antidote")
                 .description("Cures a poisoned Pokémon.")
                 .type("Cure")
@@ -252,6 +270,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item9 = Itens.builder()
+                .id(9L)
                 .name("Paralyze Heal")
                 .description("Cures a paralyzed Pokémon.")
                 .type("Cure")
@@ -259,6 +278,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build();
 
         Itens item10 = Itens.builder()
+                .id(10L)
                 .name("Max Revive")
                 .description("Revives a fainted Pokémon and restores its full HP.")
                 .type("Health")
@@ -283,52 +303,62 @@ public class DatabaseSeeder implements CommandLineRunner {
 
 
         Gym gym1 = Gym.builder()
+                .id(1L)
                 .name("Campinho de futebol vila augusta")
                 .location("-7.1873, 116.0633")
                 .insignia("Campinho de futebol vila augusta")
                 .build();
 
         Gym gym2 = Gym.builder()
+                .id(2L)
                 .name("Boneco da praça")
                 .location("3.5523, 73.9604")
                 .insignia("Boneco da praça")
                 .build();
         Gym gym3 = Gym.builder()
+                .id(3L)
                 .name("Garoto dentuço")
                 .location("-76.7824, 31.4816")
                 .insignia("Garoto dentuço")
                 .build();
         Gym gym4 = Gym.builder()
+                .id(4L)
                 .name("Escola Jodé Scaramelli")
                 .location("88.4242, 138.2667")
                 .insignia("Escola Jodé Scaramelli")
                 .build();
         Gym gym5 = Gym.builder()
+                .id(5L)
                 .name("Grafite O Filme Antigo")
                 .location("-63.1892, -15.2891")
                 .insignia("Grafite O Filme Antigo")
                 .build();
         Gym gym6 = Gym.builder()
+                .id(6L)
                 .name("Pintura MUlher Verde Na Ginástica")
                 .location("73.7294, -114.9508")
                 .insignia("Pintura MUlher Verde Na Ginástica")
                 .build();
         Gym gym7 = Gym.builder()
+                .id(7L)
                 .name("Escola de Musica Nelsom")
                 .location("87.8489, -58.8601")
                 .insignia("Escola de Musica Nelsom")
                 .build();
         Gym gym8 = Gym.builder()
+                .id(8L)
                 .name("Graffiti bom dia em")
                 .location("-30.9992, 151.8908")
                 .insignia("Graffiti bom dia em")
                 .build();
         Gym gym9 = Gym.builder()
+                .id(9L)
                 .name("Padre Anchieta")
                 .location("28.4821, 23.6005")
                 .insignia("Padre Anchieta")
                 .build();
         Gym gym10 = Gym.builder()
+                .id(10L)
                 .name("Bolo de Aniversário")
                 .location("-20.0977, 164.1923")
                 .insignia("Bolo de Aniversário")
@@ -445,49 +475,59 @@ public class DatabaseSeeder implements CommandLineRunner {
 //        captureRepository.saveAll(List.of(capture1, capture2, capture3, capture4, capture5, capture6, capture7, capture8, capture9, capture10));
 
         Pokestops pokestop1 = Pokestops.builder()
+                .id(1L)
                 .name("Parque infantil")
                 .description("Local de diversão para crianças")
                 .location("-34.8628, 25.7879")
                 .build();
         Pokestops pokestop2 = Pokestops.builder()
+                .id(2L)
                 .name("Grafite Camaro SS")
                 .location("-40.7838, -135.9595")
                 .build();
         Pokestops pokestop3 = Pokestops.builder()
+                .id(3L)
                 .name("Grafite Carro Clássico")
                 .location("76.9943, -60.4033")
                 .build();
         Pokestops pokestop4 = Pokestops.builder()
+                .id(4L)
                 .name("Campo de futebol")
                 .description("Campo para prática de esportes")
                 .location("-19.3136, -102.4933")
                 .build();
         Pokestops pokestop5 = Pokestops.builder()
+                .id(5L)
                 .name("Quadra de Esportes Fatto")
                 .description("Quadra para prática de esportes")
                 .location("27.9153, -127.5725")
                 .build();
         Pokestops pokestop6 = Pokestops.builder()
+                .id(6L)
                 .name("Playground Fatto")
                 .description("Area de playground infantil")
                 .location("-22.2831, 59.6390")
                 .build();
         Pokestops pokestop7 = Pokestops.builder()
+                .id(7L)
                 .name("Caixa D'Água Fatto")
                 .description("Reservatório de água")
                 .location("58.3475, -32.9606")
                 .build();
         Pokestops pokestop8 = Pokestops.builder()
+                .id(8L)
                 .name("Brasil: Vila Augusta")
                 .description("Bandeira brasileira pintada de forma comemorativa")
                 .location("13.0611, 95.4967")
                 .build();
         Pokestops pokestop9 = Pokestops.builder()
+                .id(9L)
                 .name("O alien e o sorvete")
                 .description("Pintura de um alien e varios sorvetes em muro")
                 .location("3.2923, 6.1611")
                 .build();
         Pokestops pokestop10 = Pokestops.builder()
+                .id(10L)
                 .name("Graffit Desanimado")
                 .location("-73.5861, -87.0501")
                 .build();

@@ -30,16 +30,14 @@ public class TrainerController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Trainers> trainers = trainersRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(trainers.map(Trainers::toEntityModel));
+        }
         Page<Trainers> trainers = trainersRepository.findAll(pageable);
         return assembler.toModel(trainers.map(Trainers::toEntityModel));
-    }
 
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName(@RequestParam(required = false) @PageableDefault(size = 10)
-                                                      Pageable pageable, String search){
-        Page<Trainers> trainers = trainersRepository.findByNameContaining(search, pageable);
-        return assembler.toModel(trainers.map(Trainers::toEntityModel));
     }
 
     @GetMapping("{id}")

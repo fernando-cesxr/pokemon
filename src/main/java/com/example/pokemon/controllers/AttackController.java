@@ -25,27 +25,23 @@ public class AttackController {
     @Autowired
     PagedResourcesAssembler<Object> assembler;
 
+
     @GetMapping
-    public PagedModel<EntityModel<Object>>index(@PageableDefault(size = 10) Pageable pageable){
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Attacks> attacks = attacksRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(attacks.map(Attacks::toEntityModel));
+        }
         Page<Attacks> attacks = attacksRepository.findAll(pageable);
         return assembler.toModel(attacks.map(Attacks::toEntityModel));
-    }
 
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName(@RequestParam(required = true) String search,
-                                                      @PageableDefault(size = 10) Pageable pageable){
-        Page<Attacks> attacks = attacksRepository.findByNameContaining(search, pageable);
-        return assembler.toModel(attacks.map(Attacks::toEntityModel));
     }
-
 
     @GetMapping("{id}")
     public EntityModel<Attacks> show(@PathVariable Long id){
         var attacks = attacksRepository.findById(id).orElseThrow(() -> new RestNotFoundException("Attack not found"));
         return attacks.toEntityModel();
     }
-
-
 
     @PostMapping
     public ResponseEntity<Attacks> create(@RequestBody @Valid Attacks attacks){

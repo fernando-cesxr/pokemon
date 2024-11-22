@@ -52,17 +52,15 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 
-    @GetMapping()
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10) Pageable pageable){
+    @GetMapping
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String email, @PageableDefault(size = 10) Pageable pageable){
+        if (email != null){
+            Page<User> user = userRepository.findByEmailContaining(email, pageable);
+            return assembler.toModel(user.map(User::toEntityModel));
+        }
         Page<User> user = userRepository.findAll(pageable);
         return assembler.toModel(user.map(User::toEntityModel));
-    }
 
-    @GetMapping("/findByEmail")
-    public PagedModel<EntityModel<Object>> searchEmail(@RequestParam(required = false) @PageableDefault(size = 10)
-                                                       Pageable pageable, String search){
-        Page<User> user = userRepository.findByEmailContaining(search, pageable);
-        return assembler.toModel(user.map(User::toEntityModel));
     }
 
     @GetMapping("{id}")

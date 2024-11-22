@@ -26,17 +26,15 @@ public class PokestopsController {
     PagedResourcesAssembler assembler;
 
     @GetMapping
-    public PagedModel<EntityModel<Object>> index(@PageableDefault(size = 10)Pageable pageable){
+    public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
+        if (search != null){
+            Page<Pokestops> pokestops = pokestopsRepository.findByNameContaining(search, pageable);
+            return assembler.toModel(pokestops.map(Pokestops::toEntityModel));
+        }
+
         Page<Pokestops> pokestops = pokestopsRepository.findAll(pageable);
-
         return assembler.toModel(pokestops.map(Pokestops::toEntityModel));
-    }
 
-    @GetMapping("/findByName")
-    public PagedModel<EntityModel<Object>> searchName(@RequestParam(required = true) String search,
-                                                      @PageableDefault(size= 10) Pageable pageable ){
-        Page<Pokestops> pokestops = pokestopsRepository.findByNameContaining(search, pageable);
-        return assembler.toModel(pokestops.map(Pokestops::toEntityModel));
     }
 
 
