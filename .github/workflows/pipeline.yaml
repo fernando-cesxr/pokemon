@@ -15,7 +15,7 @@ jobs:
           distribution: 'temurin'
           architecture: x64
       - name: Installing dependencies...
-        run: mvn clean install
+        run: mvn clean install -Ddb_url={{ secrets.db_url }} -Ddb_password={{ secrets.db_password }} -Dsecret={{ secrets.secret }}
   build:
     needs: install
     runs-on: ubuntu-latest
