@@ -28,7 +28,7 @@ jobs:
           distribution: 'temurin'
           architecture: x64
       - name: Building java application
-        run: mvn clean package
+        run: mvn clean package -Ddb_url={{ secrets.db_url }} -Ddb_password={{ secrets.db_password }} -Dsecret={{ secrets.secret }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
