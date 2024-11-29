@@ -12,6 +12,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: 'temurin'
           architecture: x64
       - name: Installing dependencies...
         run: mvn clean install
@@ -24,6 +25,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
+          distribution: 'temurin'
           architecture: x64
       - name: Building java application
         run: mvn clean package
