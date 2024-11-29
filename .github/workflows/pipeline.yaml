@@ -34,7 +34,7 @@ jobs:
           role-to-assume: arn:aws:iam::025066237585:role/github_actions_admin #change to reflect your IAM role’s ARN
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           #aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          #aws-region: us-east-1
+          aws-region: us-east-1
       - name: Building java application
         run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
       # - name: ECR Login
