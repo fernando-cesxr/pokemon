@@ -27,10 +27,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           architecture: x64
-      #- name: Configure AWS Credentials
-        #uses: aws-actions/configure-aws-credentials@v1
-        #with:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
           #aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::025066237585:role/github_actions_admin #change to reflect your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
           #aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           #aws-region: us-east-1
       - name: Building java application
@@ -45,8 +47,6 @@ jobs:
       #   run: docker tag pokemon-api:latest 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
       # - name: Pushing image...
       #   run: docker push 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
-      - name: Check environment variables
-        run: echo ${{ secrets.ACCESS_KEY }} && echo ${{ secrets.SECRET_ACCESS_KEY }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
