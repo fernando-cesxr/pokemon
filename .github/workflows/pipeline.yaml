@@ -1,0 +1,30 @@
+name: pokemon-pipeline
+runs-on: ubuntu-latest
+on:
+  push:
+    branches:
+      - main
+jobs:
+  install:
+    steps:
+      uses: actions/checkout@v4
+        - name: Installing Dependencies...
+          uses: actions/setup-java@v4
+          with:
+            java-version: '17'
+            architecture: x64
+          run: mvn clean install
+  build:
+    needs: install
+    steps:
+      uses: actions/checkout@v4
+        - name: Building java application.
+          uses: actions/setup-java@v4
+          with:
+            java-version: '17'
+            architecture: x64
+          run: mvn clean package
+  deploy:
+    needs: build
+    steps:
+      uses: actions/checkout@v4
