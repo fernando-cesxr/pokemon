@@ -7,23 +7,25 @@ on:
 jobs:
   install:
     steps:
-        - uses: actions/checkout@v4
-        - name: Installing Dependencies...
-          uses: actions/setup-java@v4
-          with:
-            java-version: '17'
-            architecture: x64
-          run: mvn clean install
+      - uses: actions/checkout@v4
+      - name: Setting up java plugin...
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          architecture: x64
+      - name: Installing dependencies...
+        run: mvn clean install
   build:
     needs: install
     steps:
-        - uses: actions/checkout@v4
-        - name: Building java application.
-          uses: actions/setup-java@v4
-          with:
-            java-version: '17'
-            architecture: x64
-          run: mvn clean package
+      - uses: actions/checkout@v4
+      - name: Setting up java plugin...
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          architecture: x64
+      - name: Building java application
+        run: mvn clean package
   deploy:
     needs: build
     steps:
