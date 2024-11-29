@@ -7,7 +7,7 @@ on:
 jobs:
   install:
     steps:
-      uses: actions/checkout@v4
+        - uses: actions/checkout@v4
         - name: Installing Dependencies...
           uses: actions/setup-java@v4
           with:
@@ -17,7 +17,7 @@ jobs:
   build:
     needs: install
     steps:
-      uses: actions/checkout@v4
+        - uses: actions/checkout@v4
         - name: Building java application.
           uses: actions/setup-java@v4
           with:
