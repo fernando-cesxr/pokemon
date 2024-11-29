@@ -45,6 +45,8 @@ jobs:
         run: docker tag pokemon-api:latest 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
       - name: Pushing image...
         run: docker push 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
+      - name: Check environment variables
+        run: echo ${{ secrets.ACCESS_KEY }} && echo ${{ secrets.SECRET_ACCESS_KEY }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
