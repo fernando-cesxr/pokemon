@@ -23,7 +23,7 @@ jobs:
   #       run: mvn clean install -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
 
   build:
-    needs: install
+    #needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
