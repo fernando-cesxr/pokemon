@@ -45,6 +45,8 @@ jobs:
       # Log in to Docker Hub
       - name: Docker login
         run: docker login -u k0ffeee -p=$DOCKER_PASS
+      - name: Print var
+        run: echo $DOCKER_PASS
 
   deploy:
     needs: build
