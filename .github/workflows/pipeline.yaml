@@ -41,7 +41,7 @@ jobs:
 
       # Log in to Docker Hub
       - name: Docker login
-        run: docker login -u k0ffeee -p ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u k0ffeee -p ${{ vars.DOCKER_PASSWORD }}
 
   deploy:
     needs: build
