@@ -40,10 +40,8 @@ jobs:
         run: docker build -t pokemon-api .
 
       # Log in to Docker Hub
-      # - name: Docker login
-      #   run: docker login -u k0ffeee -p ${{ vars.DOCKER_PASSWORD }}
-      - name: print var
-        run: echo ${{ vars.DOCKER_PASSWORD }}
+      - name: Docker login
+        run: docker login -u k0ffeee -p ${{ secrets.DOCKER_PASS }}
 
   deploy:
     needs: build
