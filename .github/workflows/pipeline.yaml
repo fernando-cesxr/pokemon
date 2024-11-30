@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -24,24 +27,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setting up Java plugin...
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          architecture: x64
-      - name: Building Java application
-        run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
+      # - name: Setting up Java plugin...
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     java-version: '17'
+      #     distribution: 'temurin'
+      #     architecture: x64
+      # - name: Building Java application
+      #   run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
 
-      - uses: docker/setup-qemu-action@v3
-      - uses: docker/setup-buildx-action@v3
+      # - uses: docker/setup-qemu-action@v3
+      # - uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image
-        run: docker build -t pokemon-api .
+      # - name: Build Docker image
+      #   run: docker build -t pokemon-api .
 
       # Log in to Docker Hub
       - name: Docker login
-        run: docker login -u k0ffeee -p=${{ secrets.DOCKER_PASS }}
+        run: docker login -u k0ffeee -p=$DOCKER_PASS
 
   deploy:
     needs: build
