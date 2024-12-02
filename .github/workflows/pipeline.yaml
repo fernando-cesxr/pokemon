@@ -29,6 +29,8 @@ jobs:
       ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v4
+      - name: Clear AWS Credentials
+        run: unset ACCESS_KEY SECRET_ACCESS_KEY
       # - uses: aws-actions/configure-aws-credentials@v4.0.2
       #   with:
       #     aws-region: us-east-1
@@ -36,6 +38,7 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
       - run: echo ${{ secrets.ACCESS_KEY }}
       - run: echo $ACCESS_KEY
+
       - run: aws s3 ls
       # - name: Setting up Java plugin...
       #   uses: actions/setup-java@v4
