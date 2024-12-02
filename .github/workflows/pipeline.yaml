@@ -5,8 +5,9 @@ on:
     branches:
       - main
 
-env:
-  DOCKER_PASS: ${{ secrets.DOCKERHUB_PASSWORD }}
+permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read  
 
 jobs:
   # install:
