@@ -51,13 +51,13 @@ jobs:
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - name: Logging to ECR...
-        run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 025066237585.dkr.ecr.us-east-1.amazonaws.com
+        run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/c5b5b5a8
       - name: Build Docker image
-        run: docker build -t pokemon-api .
+        run: docker build -t fernandocesxr/pokemon-api .
       - name: Tagging image...
-        run: docker tag pokemon-api:latest 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
+        run: docker tag fernandocesxr/pokemon-api:latest public.ecr.aws/c5b5b5a8/fernandocesxr/pokemon-api:latest
       - name: Pushing image...
-        run: docker push 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
+        run: docker push public.ecr.aws/c5b5b5a8/fernandocesxr/pokemon-api:latest
   finally:
     needs: build
     if: success()
