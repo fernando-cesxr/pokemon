@@ -11,6 +11,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    environment: db_url
     env:
       ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
     steps:
