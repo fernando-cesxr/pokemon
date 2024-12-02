@@ -46,14 +46,14 @@ jobs:
         uses: docker/login-action@v3.3.0
         with:
           username: "k0ffeee"
-          password: ${{ env.DOCKER_PASS }}
+          password: $DOCKER_PASS
           logout: true
 
       # Log in to Docker Hub
-      # - name: Docker login
-      #   run: docker login -u k0ffeee -p=$DOCKER_PASS
-      # - name: Print var
-      #   run: echo $DOCKER_PASS
+#       - name: Docker login
+#         run: docker login -u k0ffeee -p=$DOCKER_PASS
+#       - name: Print var
+#         run: echo $DOCKER_PASS
 
   # deploy:
   #   needs: build
