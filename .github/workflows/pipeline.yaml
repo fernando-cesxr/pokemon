@@ -63,5 +63,5 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     steps:
-      - run: "Congratulations you are all set!!!🎉🎉🎉"
+      - run: echo "Congratulations you are all set!!!🎉🎉🎉"
 
