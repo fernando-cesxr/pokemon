@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DOCKER_PASS: ${{ secrets. DOCKER_PASS }}
+  DOCKER_PASS: ${{ secrets.DOCKERHUB_TOKEN }}
 
 jobs:
   # install:
@@ -46,7 +46,7 @@ jobs:
         uses: docker/login-action@v3.3.0
         with:
           username: "k0ffeee"
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ DOCKER_PASS }}
           logout: true
 
       # Log in to Docker Hub
