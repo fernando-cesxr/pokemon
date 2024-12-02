@@ -3,11 +3,7 @@ name: pokemon-pipeline
 on:
   push:
     branches:
-      - main
-
-permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read  
+      - main 
 
 jobs:
   # install:
@@ -26,6 +22,11 @@ jobs:
   build:
     #needs: install
     runs-on: ubuntu-latest
+    permissions:
+          id-token: write
+          contents: read 
+    env:
+      ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v4
       # - uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -33,7 +34,8 @@ jobs:
       #     aws-region: us-east-1
       #     aws-access-key-id: ${{ secrets.ACCESS_KEY }}
       #     aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
-      - run: echo ${{ secrets.ACCESS_KEY_ID }}
+      - run: echo ${{ secrets.ACCESS_KEY }}
+      - run: echo $ACCESS_KEY
       - run: aws s3 ls
       # - name: Setting up Java plugin...
       #   uses: actions/setup-java@v4
