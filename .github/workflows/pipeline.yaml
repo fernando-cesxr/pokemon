@@ -54,15 +54,12 @@ jobs:
         run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 025066237585.dkr.ecr.us-east-1.amazonaws.com
       - name: Build Docker image
         run: docker build -t pokemon-api .
-  deploy:
-     needs: build
-     runs-on: ubuntu-latest
-     steps:
       - name: Tagging image...
         run: docker tag pokemon-api:latest 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
       - name: Pushing image...
         run: docker push 025066237585.dkr.ecr.us-east-1.amazonaws.com/pokemon-api:latest
   finally:
+    needs: build
     if: success()
     runs-on: ubuntu-latest
     steps:
