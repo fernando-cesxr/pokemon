@@ -6,70 +6,24 @@ on:
       - main 
 
 jobs:
-  # install:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Setting up Java plugin...
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: '17'
-  #         distribution: 'temurin'
-  #         architecture: x64
-  #     - name: Installing dependencies...
-  #       run: mvn clean install -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
-
   build:
-    #needs: install
     runs-on: ubuntu-latest
     permissions:
-          id-token: write
-          contents: read 
+      id-token: write
+      contents: read
     env:
       ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v4
-      - name: Clear AWS Credentials
-        run: unset ACCESS_KEY SECRET_ACCESS_KEY
-      # - uses: aws-actions/configure-aws-credentials@v4.0.2
-      #   with:
-      #     aws-region: us-east-1
-      #     aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-      #     aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
-      - run: echo ${{ secrets.ACCESS_KEY }}
-      - run: echo $ACCESS_KEY
+      
+      # Debug environment variables
+      - name: Debug Environment
+        run: env
+      
+      # Confirm if the variable is set
+      - name: Check ACCESS_KEY
+        run: '[ -n "$ACCESS_KEY" ] && echo "ACCESS_KEY is set" || echo "ACCESS_KEY is not set"'
 
-      - run: aws s3 ls
-      # - name: Setting up Java plugin...
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     java-version: '17'
-      #     distribution: 'temurin'
-      #     architecture: x64
-      # - name: Building Java application
-      #   run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
-
-      # - uses: docker/setup-qemu-action@v3
-      # - uses: docker/setup-buildx-action@v3
-
-      # - name: Build Docker image
-      #   run: docker build -t pokemon-api .
-
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v3.3.0
-      #   with:
-      #     username: "k0ffeee"
-      #     password: $DOCKER_PASS
-      #     logout: true
-
-      # Log in to Docker Hub
-#       - name: Docker login
-#         run: docker login -u k0ffeee -p=$DOCKER_PASS
-#       - name: Print var
-#         run: echo $DOCKER_PASS
-
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+      # Print ACCESS_KEY securely
+      - name: Echo Access Key
+        run: echo "$ACCESS_KEY"
