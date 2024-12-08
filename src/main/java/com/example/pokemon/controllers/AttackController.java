@@ -26,6 +26,12 @@ public class AttackController {
     PagedResourcesAssembler<Object> assembler;
 
 
+    @GetMapping("ping")
+    public String ping(){
+        return "pong";
+    }
+
+
     @GetMapping
     public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
         if (search != null){
