@@ -71,7 +71,7 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
       - name: deploying into aws
-        run: aws ecs update-service --cluster "fernandocesxr-pokemon-api-container" --service "pokemon-api-service" --task-definition "arn:aws:ecs:us-east-1:025066237585:task-definition/pokemon-api:4"
+        run: aws ecs update-service --cluster fernandocesxr-pokemon-api-container --service pokemon-api-service --force-new-deployment
   finally:
     needs: deploy
     if: success()
