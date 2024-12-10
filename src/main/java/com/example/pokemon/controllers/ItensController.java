@@ -25,11 +25,6 @@ public class ItensController {
     @Autowired
     PagedResourcesAssembler assembler;
 
-    @GetMapping("/ping")
-    public String ping(){
-        return "pong";
-    }
-
     @GetMapping
     public PagedModel<EntityModel<Object>>index(@RequestParam(required = false) String search, @PageableDefault(size = 10) Pageable pageable){
         if (search != null){
@@ -46,8 +41,6 @@ public class ItensController {
 
         return itens.toEntityModel();
     }
-
-
 
     @PostMapping
     public ResponseEntity<Itens> create(@RequestBody @Valid Itens itens){
