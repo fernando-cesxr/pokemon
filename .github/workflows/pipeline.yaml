@@ -58,6 +58,17 @@ jobs:
         run: docker tag fernandocesxr/pokemon-api:latest public.ecr.aws/c5b5b5a8/fernandocesxr/pokemon-api:latest
       - name: Pushing image...
         run: docker push public.ecr.aws/c5b5b5a8/fernandocesxr/pokemon-api:latest
+  deploy:
+    - need: build
+    - runs-on: ubuntu-latest
+    - environment: db_url
+    - steps:
+        - uses: aws-actions/configure-aws-credentials@v4
+          with:
+            aws-region: us-east-1
+            aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+            aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
+        - run: aws s3 ls
   finally:
     needs: build
     if: success()
