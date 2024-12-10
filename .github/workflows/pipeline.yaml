@@ -47,7 +47,9 @@ jobs:
           distribution: 'temurin'
           architecture: x64
       - name: Building Java application
-        run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
+        run:  mvn clean package -DskipTests
+#        run: mvn clean package -DDB_URL=${{ secrets.DB_URL }} -DDB_PASSWORD=${{ secrets.DB_PASSWORD }} -DSECRET=${{ secrets.SECRET }} -DDB_USER=${{ secrets.DB_USER }} -DskipTests
+
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - name: Logging to ECR...
