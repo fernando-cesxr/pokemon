@@ -59,7 +59,7 @@ jobs:
       - name: Pushing image...
         run: docker push public.ecr.aws/c5b5b5a8/fernandocesxr/pokemon-api:latest
   deploy:
-    - need: build
+    - needs: build
     - runs-on: ubuntu-latest
     - environment: db_url
     - steps:
