@@ -70,7 +70,8 @@ jobs:
           aws-region: us-east-1
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
-      - run: aws s3 ls
+      - name: deploying into aws
+        run: aws ecs update-service --cluster "fernandocesxr-pokemon-api-container" --service "pokemon-api-service" --task-definition "arn:aws:ecs:us-east-1:025066237585:task/fernandocesxr-pokemon-api-container/e76c5c3a796048329c4d2e2e7f19026e"
   finally:
     needs: build
     if: success()
